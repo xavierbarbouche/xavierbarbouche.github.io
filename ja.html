@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ザビエル・バーブーシュ</title>
+  <meta name="description" content="ザビエル・バーブーシュ ｜ 米国ウィスコンシン州マディソン出身のデータエンジニア。日米を繋ぐキャリアを築きたいと考えています。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #0B1220;
+      --body: #1F2937;
+      --muted: #6B7280;
+      --rule: #E5E7EB;
+      --rule-dark: #CBD5E1;
+      --soft: #F8FAFC;
+      --card: #FFFFFF;
+      --bg: #FFFFFF;
+      --banner: linear-gradient(180deg, #EEF2FF 0%, #E8EEFF 100%);
+      --blue: #2563EB;
+      --blue-ink: #1D4ED8;
+      --blue-soft: #DBEAFE;
+      --chip-bg: #F1F5F9;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--body);
+      font-family: 'Inter', 'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Meiryo', sans-serif;
+      font-size: 16px;
+      line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { color: var(--blue-ink); text-decoration: underline; }
+
+    /* ---------- Nav ---------- */
+    nav {
+      position: sticky; top: 0; z-index: 20;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: saturate(140%) blur(10px);
+      border-bottom: 1px solid var(--rule);
+    }
+    .nav-inner {
+      max-width: 1080px; margin: 0 auto;
+      padding: 16px 24px;
+      display: flex; align-items: center; justify-content: space-between; gap: 24px;
+    }
+    .brand { color: var(--ink); font-weight: 700; font-size: 18px; letter-spacing: 0; }
+    .nav-links { display: flex; gap: 24px; align-items: center; }
+    .nav-links a {
+      color: var(--body); font-weight: 500; font-size: 15px;
+      padding: 6px 2px;
+      border-bottom: 2px solid transparent;
+      text-decoration: none;
+      transition: border-color 120ms ease, color 120ms ease;
+    }
+    .nav-links a.active { color: var(--blue); border-bottom-color: var(--blue); }
+    .nav-links a:hover { color: var(--blue); text-decoration: none; }
+    .nav-links a.lang-toggle {
+      padding: 5px 12px;
+      border: 1px solid var(--rule);
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--muted);
+      font-family: 'Inter', sans-serif;
+    }
+    .nav-links a.lang-toggle:hover {
+      border-color: var(--blue);
+      color: var(--blue);
+      background: var(--blue-soft);
+    }
+    @media (max-width: 640px) {
+      .nav-links { gap: 14px; }
+      .nav-links a { font-size: 14px; }
+      .nav-links a:nth-child(n+4):not(.lang-toggle) { display: none; }
+    }
+
+    /* ---------- Banner ---------- */
+    .banner {
+      background: var(--banner);
+      padding: 56px 24px 64px;
+      text-align: center;
+    }
+    .banner h1 {
+      font-size: 48px; font-weight: 700;
+      color: var(--ink); letter-spacing: 0.02em;
+      margin: 0 0 10px; line-height: 1.2;
+    }
+    .banner .sub {
+      font-size: 16px; color: var(--muted);
+      margin: 0; font-weight: 400;
+    }
+    @media (max-width: 640px) {
+      .banner { padding: 40px 24px 48px; }
+      .banner h1 { font-size: 32px; }
+    }
+
+    /* ---------- Main grid ---------- */
+    main {
+      max-width: 1080px; margin: 0 auto;
+      padding: 64px 24px 80px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+      gap: 56px;
+      align-items: start;
+    }
+    @media (max-width: 900px) {
+      main { grid-template-columns: 1fr; gap: 40px; padding: 48px 24px 72px; }
+    }
+
+    /* ---------- Left column: prose ---------- */
+    .prose p {
+      font-size: 16px; color: var(--body);
+      margin: 0 0 16px;
+    }
+    .prose p:last-child { margin-bottom: 0; }
+    .prose h2 {
+      font-size: 22px; font-weight: 700;
+      color: var(--ink); letter-spacing: 0;
+      margin: 40px 0 12px; line-height: 1.3;
+    }
+    .prose h2:first-of-type { margin-top: 0; }
+    .prose h3 {
+      font-size: 15px; font-weight: 700;
+      color: var(--ink);
+      margin: 22px 0 6px;
+    }
+    .prose strong { color: var(--ink); font-weight: 600; }
+    .prose code {
+      font-family: 'SF Mono', 'Monaco', 'Menlo', monospace;
+      font-size: 13px;
+      background: var(--chip-bg);
+      padding: 1px 6px;
+      border-radius: 4px;
+      border: 1px solid var(--rule);
+      color: var(--ink);
+    }
+    .prose em { color: var(--body); font-style: italic; }
+
+    /* ---------- Right column: sidebar stack ---------- */
+    .sidebar { display: flex; flex-direction: column; gap: 20px; }
+
+    /* Headshot card */
+    .headshot-card {
+      display: flex; justify-content: center;
+      padding: 24px 0 4px;
+    }
+    .avatar {
+      width: 180px; height: 180px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #DBEAFE 0%, #E0E7FF 100%);
+      border: 5px solid #fff;
+      box-shadow: 0 16px 36px -16px rgba(37,99,235,0.3), 0 4px 14px -6px rgba(15,23,42,0.12);
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+    .avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    /* Cards */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--rule);
+      border-radius: 14px;
+      padding: 24px;
+      box-shadow: 0 1px 2px rgba(15,23,42,0.04);
+    }
+    .card h3 {
+      font-size: 19px; font-weight: 700;
+      color: var(--ink); letter-spacing: 0;
+      margin: 0 0 18px;
+    }
+
+    /* Skills & Certs inner */
+    .skill-group h4 {
+      font-size: 14px; font-weight: 700;
+      color: var(--ink);
+      margin: 0 0 10px;
+    }
+    .skill-group + .skill-group { margin-top: 18px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+    .chip {
+      background: var(--chip-bg);
+      border: 1px solid var(--rule);
+      color: var(--body);
+      font-size: 13px; font-weight: 500;
+      padding: 5px 10px;
+      border-radius: 6px;
+      line-height: 1.4;
+    }
+
+    /* Timeline */
+    .timeline { position: relative; padding-left: 22px; }
+    .timeline::before {
+      content: ""; position: absolute;
+      left: 5px; top: 8px; bottom: 8px;
+      width: 2px; background: var(--rule);
+    }
+    .tl-item { position: relative; padding: 4px 0 20px; }
+    .tl-item:last-child { padding-bottom: 0; }
+    .tl-item::before {
+      content: ""; position: absolute;
+      left: -22px; top: 8px;
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: var(--blue);
+      border: 3px solid #fff;
+      box-shadow: 0 0 0 1px var(--rule);
+    }
+    .tl-item .title {
+      font-weight: 700; color: var(--ink);
+      font-size: 15px; line-height: 1.4;
+      margin: 0 0 2px;
+    }
+    .tl-item .role {
+      font-size: 13px; font-weight: 600;
+      color: var(--blue);
+      margin: 0 0 4px;
+    }
+    .tl-item .desc {
+      font-size: 13px; color: var(--muted);
+      margin: 0; line-height: 1.6;
+    }
+
+    /* Let's Connect card */
+    .connect-card { text-align: center; }
+    .connect-card h3 { margin-bottom: 14px; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 11px 22px;
+      border-radius: 8px;
+      font-weight: 600; font-size: 15px;
+      background: var(--blue); color: #fff;
+      border: 1px solid var(--blue);
+      transition: background 120ms ease;
+      text-decoration: none;
+    }
+    .btn:hover { background: var(--blue-ink); color: #fff; text-decoration: none; }
+
+    /* ---------- Footer ---------- */
+    footer {
+      padding: 32px 24px;
+      background: var(--soft);
+      border-top: 1px solid var(--rule);
+    }
+    .footer-inner {
+      max-width: 1080px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 16px; flex-wrap: wrap;
+      font-size: 14px; color: var(--muted);
+    }
+    .footer-inner a { color: var(--muted); margin-left: 24px; }
+    .footer-inner a:first-of-type { margin-left: 0; }
+    .footer-inner a:hover { color: var(--blue); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="#top" class="brand">ザビエル・バーブーシュ</a>
+      <div class="nav-links">
+        <a href="#top" class="active">自己紹介</a>
+        <a href="#experience">職歴</a>
+        <a href="#study">学歴</a>
+        <a href="#contact">お問い合わせ</a>
+        <a href="index.html" class="lang-toggle" lang="en">English</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="banner" id="top">
+    <h1>自己紹介</h1>
+    <p class="sub">ザビエル・バーブーシュ ｜ 米国ウィスコンシン州マディソン ｜ 日米を繋ぐ</p>
+  </header>
+
+  <main>
+
+    <!-- ============ LEFT: PROSE ============ -->
+    <div class="prose">
+      <p>
+        はじめまして。ザビエル・バーブーシュと申します。24歳、米国ウィスコンシン州マディソン出身です。日本で長くキャリアを築きたいと考えています。昨年、長野県上伊那郡箕輪町の学校にて、9ヶ月間、600名の日本人生徒に英語を教えました。帰国後の2025年4月からは、米国のスポーツ分析スタートアップで Chief Data Analyst（データ分析責任者）として勤務しています。この二つの仕事から学んだことは、結局同じでした——「良いシステム」と「良いコミュニケーション」は、別の角度から見れば、同じ問題なのです。
+      </p>
+
+      <h2>職歴</h2>
+      <p>
+        最初の本格的な仕事は、ウィスコンシン州マディソンにある <strong>Forward Health Group</strong> でのソフトウェア開発インターンでした。一年余りの間、社内ツールと顧客向けポータルの開発を担当しました——派手ではありませんが、小規模チームを前に進めるための仕事です。実際のユーザーに向けて、実際の締切のもとで「何かを世に出す」という経験を、初めてここで得ました。
+      </p>
+      <p>
+        2024年8月に、<strong>長野県上伊那郡箕輪町</strong>へ移り、<strong>株式会社エーツーゼット（AtoZ Corporation）</strong> にて英語教師としての勤務を始めました。9ヶ月間、12クラスの授業を設計し、習熟度の幅が大きい600名以上の生徒一人ひとりに進捗レポートを書きました。日本で教えたことで、日本語以上のことを学びました——日本の組織の中で、コミュニケーション・丁寧さ・忍耐がどのように機能するのかを、実際の現場で身をもって学ぶことができました。
+      </p>
+      <p>
+        帰国後の2025年4月からは、米国のスポーツ観戦記録スタートアップにて <strong>Chief Data Analyst（データ分析責任者）</strong> として勤務しています。仕事の中心は、数十年分の雑然とした大学アメリカンフットボールの観戦データ——紙ベースで、大学ごとに形式がばらばらで、バインダーを管理していた人次第で整理のされ方も違う——を、アプリケーションが扱える整然としたクエリ可能な層へと作り変えることです。過去の統計データと、試合が進行中のリアルタイム・フィードを統合するアーキテクチャの設計も、私の担当領域です。
+      </p>
+
+      <h2>日本を目指す理由</h2>
+      <p>
+        日本への関心は、単なる憧れではありません。ウィスコンシン大学マディソン校にて、日本語を4学期、日本文化をさらに2学期履修しました。来日経験は2回あり、その後、長野県の小さな町で9ヶ月間を過ごしました。帰国する時、「また戻りたい」と強く感じました——ただしそれは、懐かしさではなく、明確な意志としてです。きちんとした仕事を持ち、尊敬できる会社で、数ヶ月ではなく数年かけて成長できる役割で。日本の会社で、長く働きたいと考えています。
+      </p>
+
+      <h2>略歴</h2>
+      <p>
+        ウィスコンシン州マディソンで育ちました。大学はコロラド大学ボルダー校で学び始め、その後、地元のウィスコンシン大学マディソン校へ編入しました。同校で経済学を専攻し、計量経済学に重点を置いて履修——雑然とした実世界のデータに対し、ごまかさず正直に向き合うことを求めるその規律に、強く惹かれたからです。
+      </p>
+      <p>
+        仕事以外では、現代のAIツールが小規模チームの可能性をどう広げていくかに強い関心があります。日本語学習は継続中で、週末は家族や友人と過ごします。
+      </p>
+
+      <h2>趣味・関心</h2>
+
+      <h3>スポーツ</h3>
+      <p>
+        アメリカンフットボールでは、<strong>ミネソタ・バイキングス</strong>（NFL）と<strong>ウィスコンシン・バジャーズ</strong>（大学）を応援しています。サッカーは国際大会を中心に観戦していて、特に<strong>UEFA欧州選手権</strong>と<strong>FIFAワールドカップ</strong>は毎回欠かさず見ています。
+      </p>
+
+      <h3>ゲーム</h3>
+      <p>
+        ジャンルを問わず、様々なゲームを日常的にプレイしています。Discord のハンドルネームは <code>xlbluefish</code> です。
+      </p>
+
+      <h3>映画・アニメ</h3>
+      <p>
+        アニメは<em>『ホリミヤ』</em>と<em>『呪術廻戦』</em>が好きです。映画は<em>『マネー・ショート 華麗なる大逆転』</em>と<em>『オデッセイ』</em>を繰り返し観ています。
+      </p>
+    </div>
+
+    <!-- ============ RIGHT: SIDEBAR ============ -->
+    <aside class="sidebar">
+
+      <!-- Headshot -->
+      <div class="headshot-card">
+        <div class="avatar"><img src="xavier.jpg" alt="ザビエル・バーブーシュ（長野県箕輪町にて）"></div>
+      </div>
+
+      <!-- Skills & Certs -->
+      <section class="card" id="skills">
+        <h3>スキル・資格</h3>
+
+        <div class="skill-group">
+          <h4>専門スキル</h4>
+          <div class="chips">
+            <span class="chip">Python</span>
+            <span class="chip">SQL</span>
+            <span class="chip">JavaScript</span>
+            <span class="chip">Java</span>
+            <span class="chip">C++</span>
+            <span class="chip">R</span>
+            <span class="chip">HTML/CSS</span>
+            <span class="chip">データエンジニアリング</span>
+            <span class="chip">AIツール活用</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <h4>AI・業務ツール</h4>
+          <div class="chips">
+            <span class="chip">OpenAI</span>
+            <span class="chip">Claude</span>
+            <span class="chip">Gemini</span>
+            <span class="chip">DeepSeek</span>
+            <span class="chip">Excel</span>
+            <span class="chip">Google Workspace</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <h4>取得資格</h4>
+          <div class="chips">
+            <span class="chip">ハーバード大学 CS50：Python で学ぶAI入門</span>
+            <span class="chip">CAPM（プロジェクトマネジメント認定）</span>
+            <span class="chip">TEFL FullCircle 120時間認定</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <h4>語学</h4>
+          <div class="chips">
+            <span class="chip">英語 ・ 母国語</span>
+            <span class="chip">日本語 ・ 日常会話</span>
+            <span class="chip">フランス語 ・ 日常会話</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Experience timeline -->
+      <section class="card" id="experience">
+        <h3>職歴</h3>
+        <div class="timeline">
+          <div class="tl-item">
+            <p class="title">スポーツ観戦データ スタートアップ</p>
+            <p class="role">Chief Data Analyst（データ分析責任者）</p>
+            <p class="desc">2025年4月 〜 現在。データパイプライン設計、アーキテクチャ構築、過去・リアルタイム統計データの統合。</p>
+          </div>
+          <div class="tl-item">
+            <p class="title">株式会社エーツーゼット（AtoZ Corporation）</p>
+            <p class="role">英語教師 ・ 長野県箕輪町</p>
+            <p class="desc">2024年8月 〜 2025年4月。12クラス・600名以上を担当。マルチメディアを活用した指導と個別進捗評価。</p>
+          </div>
+          <div class="tl-item">
+            <p class="title">Forward Health Group</p>
+            <p class="role">ソフトウェア開発インターン ・ ウィスコンシン州マディソン</p>
+            <p class="desc">2021年6月 〜 2022年8月。社内インフラ構築、独自 Web ポータル開発、レガシーシステム保守。</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Schooling timeline -->
+      <section class="card" id="study">
+        <h3>学歴</h3>
+        <div class="timeline">
+          <div class="tl-item">
+            <p class="title">ウィスコンシン大学マディソン校</p>
+            <p class="role">経済学士 ・ 2024年5月卒業</p>
+            <p class="desc">計量経済学・データ分析を重点履修。日本語4学期、日本文化2学期。</p>
+          </div>
+          <div class="tl-item">
+            <p class="title">コロラド大学ボルダー校</p>
+            <p class="role">経済学部 ・ 2020年 〜 2022年</p>
+            <p class="desc">2022年8月にウィスコンシン大学マディソン校へ編入。</p>
+          </div>
+          <div class="tl-item">
+            <p class="title">マディソン・ウェスト高等学校</p>
+            <p class="role">2020年卒業</p>
+            <p class="desc">ACTスコア32点・上位3%。</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Let's Connect -->
+      <section class="card connect-card" id="contact">
+        <h3>お問い合わせ</h3>
+        <a href="mailto:xavierbarbouche@gmail.com" class="btn">メールで連絡する</a>
+      </section>
+
+    </aside>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span>&copy; 2026 ザビエル・バーブーシュ ・ マディソンにて制作</span>
+      <span>
+        <a href="https://github.com/xavierbarbouche">GitHub</a>
+        <a href="https://www.linkedin.com/in/xavier-barbouche/">LinkedIn</a>
+      </span>
+    </div>
+  </footer>
+
+  <script>
+    (function() {
+      const links = document.querySelectorAll('.nav-links a');
+      const sections = Array.from(links).map(a => {
+        const href = a.getAttribute('href');
+        return href && href.startsWith('#') ? document.querySelector(href) : null;
+      });
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            links.forEach(l => l.classList.remove('active'));
+            const id = '#' + e.target.id;
+            const match = document.querySelector('.nav-links a[href="' + id + '"]');
+            if (match) match.classList.add('active');
+          }
+        });
+      }, { rootMargin: '-35% 0px -55% 0px', threshold: 0 });
+      sections.forEach(s => { if (s) obs.observe(s); });
+    })();
+  </script>
+</body>
+</html>
