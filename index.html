@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Xavier Barbouche</title>
+  <meta name="description" content="Xavier Barbouche — building a career between the U.S. and Japan. Engineering, analytics, teaching, and the tools in between.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Source+Serif+Pro:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #0B1220;
+      --slate: #1F2937;
+      --muted: #4B5563;
+      --rule: #E5E7EB;
+      --bg: #FFFFFF;
+      --accent: #1E3A8A;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 17px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    main {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 96px 24px 120px;
+    }
+    header {
+      margin-bottom: 56px;
+    }
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+    h1 {
+      font-family: 'Source Serif Pro', Georgia, serif;
+      font-weight: 600;
+      font-size: 40px;
+      line-height: 1.15;
+      margin: 0 0 10px;
+      letter-spacing: -0.01em;
+    }
+    .role {
+      color: var(--slate);
+      font-size: 18px;
+      margin: 0;
+    }
+    .rule {
+      height: 1px;
+      background: var(--accent);
+      width: 48px;
+      margin: 36px 0;
+      border: 0;
+    }
+    section {
+      margin-bottom: 40px;
+    }
+    h2 {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 0 0 14px;
+    }
+    p {
+      margin: 0 0 14px;
+      color: var(--slate);
+    }
+    p strong {
+      color: var(--ink);
+      font-weight: 600;
+    }
+    ul.work {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    ul.work li {
+      padding: 16px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    ul.work li:last-child { border-bottom: 0; }
+    ul.work .title {
+      font-weight: 600;
+      color: var(--ink);
+      display: block;
+      margin-bottom: 2px;
+    }
+    ul.work .meta {
+      font-size: 14px;
+      color: var(--muted);
+      display: block;
+      margin-bottom: 6px;
+    }
+    ul.work .desc {
+      font-size: 15px;
+      color: var(--slate);
+      margin: 0;
+    }
+    a {
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px solid var(--accent);
+      padding-bottom: 1px;
+      transition: color 120ms ease;
+    }
+    a:hover {
+      color: var(--accent);
+    }
+    footer {
+      margin-top: 72px;
+      padding-top: 24px;
+      border-top: 1px solid var(--rule);
+      font-size: 13px;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    footer a {
+      border-bottom: 0;
+      color: var(--muted);
+    }
+    footer a:hover { color: var(--ink); }
+    .jp {
+      font-family: 'Source Serif Pro', Georgia, serif;
+      font-style: italic;
+      color: var(--muted);
+      font-size: 15px;
+    }
+    @media (max-width: 520px) {
+      main { padding: 56px 20px 80px; }
+      h1 { font-size: 32px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="eyebrow">Xavier Barbouche &middot; ザビエル・バーブーシュ</div>
+      <h1>Xavier Barbouche</h1>
+      <p class="role">Building a career between the U.S. and Japan.</p>
+      <hr class="rule">
+    </header>
+
+    <section>
+      <h2>About</h2>
+      <p>
+        I grew up in Madison, Wisconsin, studied economics at the University of Wisconsin&ndash;Madison
+        with four semesters of Japanese and two of Japanese culture, and spent most of my
+        working life so far between two things: building data systems for an early-stage
+        sports&ndash;analytics company, and living and working in Japan.
+      </p>
+      <p>
+        From August 2024 through April 2025 I taught English at AtoZ Corporation in Minowa, Nagano.
+        That stretch is why I'm looking for my next chapter inside a Japanese company rather than
+        outside one. <span class="jp">日本の会社で、長く働きたいと考えています。</span>
+      </p>
+    </section>
+
+    <section>
+      <h2>Work</h2>
+      <ul class="work">
+        <li>
+          <span class="title">Chief Data Analyst &middot; Sports Attendance Networking Startup</span>
+          <span class="meta">April 2024 &mdash; Present</span>
+          <p class="desc">
+            Lead the aggregation of historical and real-time sports-attendance data that powers the app's
+            core functionality. Built the data pipelines that transform raw game metrics into app-ready
+            formats, and set the architecture that integrates legacy statistics with current performance
+            trends.
+          </p>
+        </li>
+        <li>
+          <span class="title">English Teacher &middot; AtoZ Corporation, Minowa, Nagano</span>
+          <span class="meta">August 2024 &mdash; April 2025</span>
+          <p class="desc">
+            Designed and ran high-engagement curricula for twelve classes, tailored across 300+ students
+            at different proficiency levels. Used multimedia and interactive methods to lift comprehension
+            and participation; delivered data-driven progress assessments for individual students.
+          </p>
+        </li>
+        <li>
+          <span class="title">Software Development Intern &middot; Forward Health Group, Madison</span>
+          <span class="meta">June 2021 &mdash; August 2022</span>
+          <p class="desc">
+            Built internal infrastructure components that accelerated onboarding and data integration
+            for new enterprise clients. Shipped custom web portals and internal tools; maintained and
+            iterated on legacy systems keeping critical operations running.
+          </p>
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Education &amp; Certifications</h2>
+      <p>
+        <strong>B.A., Economics</strong> &middot; University of Wisconsin&ndash;Madison, May 2024.
+        Emphasis on econometrics and data analysis. Six semesters of Japanese language and culture.
+      </p>
+      <p>
+        Harvard CS50 &mdash; Introduction to Artificial Intelligence with Python.
+        CAPM (Certified Associate in Project Management).
+        TEFL FullCircle, 120-hour certification.
+      </p>
+    </section>
+
+    <section>
+      <h2>Tools &amp; Languages</h2>
+      <p>
+        <strong>Code:</strong> Python, SQL, JavaScript, Java, C++, PHP, R, HTML/CSS.
+        <strong>AI tooling:</strong> OpenAI, Claude, Gemini, DeepSeek.
+        <strong>Work:</strong> Google Workspace, Microsoft Office, Slack, Excel.
+      </p>
+      <p>
+        <strong>Languages:</strong> English (native), Japanese (conversational, studying toward business
+        fluency), French (conversational).
+      </p>
+    </section>
+
+    <section>
+      <h2>Contact</h2>
+      <p>
+        Email: <a href="mailto:xavierbarbouche@gmail.com">xavierbarbouche@gmail.com</a>
+        &middot; Madison, Wisconsin, USA.
+      </p>
+    </section>
+
+    <footer>
+      <span>&copy; 2026 Xavier Barbouche</span>
+      <span>
+        <a href="https://github.com/xavierbarbouche">GitHub</a>
+        &nbsp;&middot;&nbsp;
+        <a href="https://www.linkedin.com/in/xavier-barbouche/">LinkedIn</a>
+      </span>
+    </footer>
+  </main>
+</body>
+</html>
