@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Xavier Barbouche</title>
+  <meta name="description" content="Xavier Barbouche — data engineer from Madison, Wisconsin. Building a career between the U.S. and Japan.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #0B1220;
+      --body: #1F2937;
+      --muted: #6B7280;
+      --rule: #E5E7EB;
+      --rule-dark: #CBD5E1;
+      --soft: #F8FAFC;
+      --card: #FFFFFF;
+      --bg: #FFFFFF;
+      --banner: linear-gradient(180deg, #EEF2FF 0%, #E8EEFF 100%);
+      --blue: #2563EB;
+      --blue-ink: #1D4ED8;
+      --blue-soft: #DBEAFE;
+      --chip-bg: #F1F5F9;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--body);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { color: var(--blue-ink); text-decoration: underline; }
+
+    /* ---------- Nav ---------- */
+    nav {
+      position: sticky; top: 0; z-index: 20;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: saturate(140%) blur(10px);
+      border-bottom: 1px solid var(--rule);
+    }
+    .nav-inner {
+      max-width: 1080px; margin: 0 auto;
+      padding: 16px 24px;
+      display: flex; align-items: center; justify-content: space-between; gap: 24px;
+    }
+    .brand { color: var(--ink); font-weight: 700; font-size: 18px; letter-spacing: -0.01em; }
+    .nav-brand-group { display: flex; align-items: center; gap: 16px; }
+    .btn-sm {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 7px 14px;
+      border-radius: 7px;
+      font-weight: 600; font-size: 13px;
+      background: var(--blue); color: #fff;
+      border: 1px solid var(--blue);
+      transition: background 120ms ease;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .btn-sm:hover { background: var(--blue-ink); color: #fff; text-decoration: none; }
+    .nav-links { display: flex; gap: 28px; align-items: center; }
+    .nav-links a {
+      color: var(--body); font-weight: 500; font-size: 15px;
+      padding: 6px 2px;
+      border-bottom: 2px solid transparent;
+      text-decoration: none;
+      transition: border-color 120ms ease, color 120ms ease;
+    }
+    .nav-links a.active { color: var(--blue); border-bottom-color: var(--blue); }
+    .nav-links a:hover { color: var(--blue); text-decoration: none; }
+    .nav-links a.lang-toggle {
+      padding: 5px 12px;
+      border: 1px solid var(--rule);
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--muted);
+    }
+    .nav-links a.lang-toggle:hover {
+      border-color: var(--blue);
+      color: var(--blue);
+      background: var(--blue-soft);
+    }
+    @media (max-width: 640px) {
+      .nav-links { gap: 16px; }
+      .nav-links a { font-size: 14px; }
+      .nav-links a:nth-child(n+4) { display: none; }
+    }
+
+    /* ---------- Banner (Option B — hero portrait, photo right) ---------- */
+    .banner {
+      position: relative;
+      background: var(--banner);
+      padding: 0;
+      overflow: hidden;
+      isolation: isolate;
+    }
+    .banner-photo {
+      position: absolute;
+      top: 0; right: 0; bottom: 0;
+      width: 62%;
+      background-image: url('xavier-stadium.jpg');
+      background-position: 65% 78%;
+      background-size: 115% auto;
+      background-repeat: no-repeat;
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, transparent 4%, rgba(0,0,0,0.45) 20%, rgba(0,0,0,0.95) 44%, #000 58%);
+              mask-image: linear-gradient(to right, transparent 0%, transparent 4%, rgba(0,0,0,0.45) 20%, rgba(0,0,0,0.95) 44%, #000 58%);
+      z-index: 0;
+    }
+    .banner-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 64px 24px 72px 26%;
+      min-height: 340px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      text-align: left;
+    }
+    .banner h1 {
+      font-size: 60px; font-weight: 800;
+      color: var(--ink); letter-spacing: -0.02em;
+      margin: 0 0 12px; line-height: 1.0;
+    }
+    .banner .sub {
+      font-size: 18px; color: var(--ink);
+      margin: 0; font-weight: 500;
+      max-width: 28ch;
+    }
+    @media (max-width: 900px) {
+      .banner-photo {
+        width: 100%;
+        height: 260px;
+        bottom: auto;
+        background-position: 60% 8%;
+        -webkit-mask-image: linear-gradient(to bottom, #000 0%, rgba(0,0,0,0.85) 65%, transparent 100%);
+                mask-image: linear-gradient(to bottom, #000 0%, rgba(0,0,0,0.85) 65%, transparent 100%);
+      }
+      .banner-inner {
+        padding: 230px 24px 40px;
+        min-height: auto;
+        text-align: center;
+        align-items: center;
+      }
+      .banner h1 { font-size: 40px; }
+      .banner .sub { max-width: none; }
+    }
+    @media (max-width: 640px) {
+      .banner-photo { height: 220px; }
+      .banner-inner { padding: 200px 20px 36px; }
+      .banner h1 { font-size: 34px; }
+      .banner .sub { font-size: 16px; }
+    }
+
+    /* ---------- Main grid ---------- */
+    main {
+      max-width: 1080px; margin: 0 auto;
+      padding: 64px 24px 80px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+      gap: 56px;
+      align-items: start;
+    }
+    @media (max-width: 900px) {
+      main { grid-template-columns: 1fr; gap: 40px; padding: 48px 24px 72px; }
+    }
+
+    /* Interests — full-width band below both columns (desktop), last block on mobile */
+    .interests-block {
+      grid-column: 1 / -1;
+      margin-top: 16px;
+      padding-top: 40px;
+      border-top: 1px solid var(--rule);
+    }
+    .interests-block .prose h2:first-of-type { margin-top: 0; }
+    @media (max-width: 900px) {
+      .interests-block { padding-top: 24px; margin-top: 0; }
+    }
+
+    /* ---------- Left column: prose ---------- */
+    .prose p {
+      font-size: 16px; color: var(--body);
+      margin: 0 0 16px;
+    }
+    .prose p:last-child { margin-bottom: 0; }
+    .prose h2 {
+      font-size: 24px; font-weight: 700;
+      color: var(--ink); letter-spacing: -0.01em;
+      margin: 40px 0 12px; line-height: 1.3;
+    }
+    .prose h2:first-of-type { margin-top: 0; }
+    .prose h3 {
+      font-size: 16px; font-weight: 700;
+      color: var(--ink); letter-spacing: 0;
+      margin: 22px 0 6px;
+    }
+    .prose strong { color: var(--ink); font-weight: 600; }
+    .prose code {
+      font-family: 'SF Mono', 'Monaco', 'Menlo', monospace;
+      font-size: 14px;
+      background: var(--chip-bg);
+      padding: 1px 6px;
+      border-radius: 4px;
+      border: 1px solid var(--rule);
+      color: var(--ink);
+    }
+    .prose em { color: var(--body); font-style: italic; }
+    .prose .jp {
+      color: var(--muted); font-style: italic; font-size: 15px;
+    }
+
+    /* ---------- Right column: sidebar stack ---------- */
+    .sidebar { display: flex; flex-direction: column; gap: 20px; }
+
+    /* Headshot card */
+    .headshot-card {
+      display: flex; justify-content: center;
+      padding: 24px 0 4px;
+    }
+    .avatar {
+      width: 180px; height: 180px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #DBEAFE 0%, #E0E7FF 100%);
+      border: 5px solid #fff;
+      box-shadow: 0 16px 36px -16px rgba(37,99,235,0.3), 0 4px 14px -6px rgba(15,23,42,0.12);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--blue); font-weight: 800; font-size: 80px;
+      letter-spacing: -0.02em;
+      overflow: hidden;
+    }
+    .avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    /* Cards */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--rule);
+      border-radius: 14px;
+      padding: 24px;
+      box-shadow: 0 1px 2px rgba(15,23,42,0.04);
+    }
+    .card h3 {
+      font-size: 20px; font-weight: 700;
+      color: var(--ink); letter-spacing: -0.01em;
+      margin: 0 0 18px;
+    }
+
+    /* Skills & Certs inner */
+    .skill-group h4 {
+      font-size: 14px; font-weight: 700;
+      color: var(--ink);
+      margin: 0 0 10px;
+    }
+    .skill-group + .skill-group { margin-top: 18px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+    .chip {
+      background: var(--chip-bg);
+      border: 1px solid var(--rule);
+      color: var(--body);
+      font-size: 13px; font-weight: 500;
+      padding: 5px 10px;
+      border-radius: 6px;
+      line-height: 1.3;
+    }
+    a.chip { text-decoration: none; transition: border-color 120ms ease, color 120ms ease, background 120ms ease; }
+    a.chip:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-soft); text-decoration: none; }
+
+    /* YouTube channel cards */
+    .yt-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin: 12px 0 0;
+    }
+    @media (max-width: 540px) { .yt-grid { grid-template-columns: 1fr; } }
+    .yt-card {
+      display: flex; align-items: center; gap: 12px;
+      padding: 12px;
+      border: 1px solid var(--rule);
+      border-radius: 12px;
+      background: var(--card);
+      text-decoration: none;
+      transition: border-color 120ms ease, transform 120ms ease, box-shadow 120ms ease;
+      min-width: 0;
+    }
+    .yt-card:hover {
+      border-color: var(--ink);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px -8px rgba(15,23,42,0.18);
+      text-decoration: none;
+    }
+    .yt-avatar {
+      flex: 0 0 auto;
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff;
+      font-weight: 700; font-size: 14px;
+      letter-spacing: -0.01em;
+      overflow: hidden;
+    }
+    .yt-avatar.thatsgood {
+      background: radial-gradient(circle at 35% 35%, #E66B2C 0%, #C24E16 70%);
+    }
+    .yt-avatar.jetlag {
+      background: #1E2A3C;
+    }
+    .yt-avatar.lcs {
+      background: #F4F4F4;
+      color: #0F172A;
+    }
+    .yt-avatar.theyard {
+      background: #0F172A;
+    }
+    .yt-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 50%; }
+    .yt-avatar.lcs img { object-fit: contain; padding: 7px; box-sizing: border-box; }
+    .yt-meta { display: flex; flex-direction: column; min-width: 0; line-height: 1.3; }
+    .yt-name {
+      font-weight: 600; color: var(--ink); font-size: 14px;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .yt-handle { font-size: 12px; color: var(--muted); }
+    .yt-tag {
+      display: inline-flex; align-items: center; gap: 4px;
+      margin-top: 4px;
+      font-size: 11px; color: var(--muted);
+      font-weight: 500;
+    }
+    .yt-tag svg { width: 16px; height: 11px; flex: 0 0 auto; }
+    .cert-card .chips { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .cert-card .chip { width: 100%; padding: 8px 12px; font-size: 14px; }
+    .cert-card .cert-row + .cert-row { margin-top: 10px; }
+    .cert-row {
+      display: flex; align-items: center; gap: 12px;
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      background: var(--card);
+      text-decoration: none;
+      transition: border-color 120ms ease, background 120ms ease, transform 120ms ease;
+    }
+    .cert-row:hover { border-color: var(--blue); background: var(--blue-soft); text-decoration: none; transform: translateY(-1px); }
+    .cert-mark {
+      flex: 0 0 auto;
+      width: 60px; height: 40px;
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 13px;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+      background: var(--soft);
+      border: 1px solid var(--rule);
+      overflow: hidden;
+    }
+    .cert-mark.harvard.fallback { background: #A41034; color: #fff; }
+    .cert-mark.pmi.fallback { background: #1B4F8C; color: #fff; }
+    .cert-mark.tefl.fallback { background: linear-gradient(135deg, #0EA371 0%, #058863 100%); color: #fff; }
+    .cert-text { display: flex; flex-direction: column; line-height: 1.3; min-width: 0; }
+    .cert-mark img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; display: block; }
+    .cert-name { font-weight: 600; color: var(--ink); font-size: 14px; }
+    .cert-sub { font-size: 12px; color: var(--muted); }
+
+    /* Sports / Movies / Anime visual blocks */
+    .logo-row {
+      display: flex; flex-wrap: wrap; gap: 14px;
+      margin: 10px 0 8px;
+      align-items: center;
+    }
+    .logo-tile {
+      display: flex; flex-direction: column; align-items: center;
+      gap: 6px;
+      padding: 8px 10px;
+      border: 1px solid var(--rule);
+      border-radius: 10px;
+      background: var(--card);
+      text-decoration: none;
+      transition: border-color 120ms ease, transform 120ms ease, box-shadow 120ms ease;
+      width: 88px;
+    }
+    .logo-tile:hover { border-color: var(--blue); transform: translateY(-1px); box-shadow: 0 4px 12px -6px rgba(15,23,42,0.18); text-decoration: none; }
+    .logo-tile-img {
+      width: 56px; height: 56px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .logo-tile-img img { max-width: 100%; max-height: 100%; object-fit: contain; }
+    .logo-tile-label { font-size: 11px; color: var(--body); font-weight: 500; text-align: center; line-height: 1.2; }
+
+    /* Media — poster cards (horizontal rectangles) */
+    .poster-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin: 10px 0 16px;
+    }
+    @media (max-width: 540px) { .poster-grid { grid-template-columns: 1fr; } }
+    .poster-card {
+      display: flex; align-items: stretch; gap: 0;
+      border: 1px solid var(--rule);
+      border-radius: 10px;
+      background: var(--card);
+      overflow: hidden;
+      text-decoration: none;
+      transition: border-color 120ms ease, transform 120ms ease, box-shadow 120ms ease;
+      min-height: 96px;
+    }
+    .poster-card:hover { border-color: var(--blue); transform: translateY(-1px); box-shadow: 0 6px 16px -8px rgba(15,23,42,0.18); text-decoration: none; }
+    .poster-img {
+      flex: 0 0 auto;
+      width: 70px;
+      background-position: center;
+      background-size: cover;
+      background-color: var(--soft);
+    }
+    .poster-meta { padding: 10px 12px; display: flex; flex-direction: column; justify-content: center; gap: 2px; min-width: 0; }
+    .poster-title { font-weight: 600; color: var(--ink); font-size: 14px; line-height: 1.3; }
+    .poster-sub { font-size: 12px; color: var(--muted); }
+
+    /* Timeline (Experience / Schooling) */
+    .timeline { position: relative; padding-left: 22px; }
+    .timeline::before {
+      content: ""; position: absolute;
+      left: 5px; top: 8px; bottom: 8px;
+      width: 2px; background: var(--rule);
+    }
+    .tl-item { position: relative; padding: 4px 0 20px; }
+    .tl-item:last-child { padding-bottom: 0; }
+    .tl-item::before {
+      content: ""; position: absolute;
+      left: -22px; top: 8px;
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: var(--blue);
+      border: 3px solid #fff;
+      box-shadow: 0 0 0 1px var(--rule);
+    }
+    .tl-item .title {
+      font-weight: 700; color: var(--ink);
+      font-size: 15px; line-height: 1.3;
+      margin: 0 0 2px;
+    }
+    .tl-item .role {
+      font-size: 13px; font-weight: 600;
+      color: var(--blue);
+      margin: 0 0 4px;
+    }
+    .tl-item .desc {
+      font-size: 13px; color: var(--muted);
+      margin: 0; line-height: 1.5;
+    }
+
+    /* Let's Connect card */
+    .connect-card { text-align: center; }
+    .connect-card h3 { margin-bottom: 14px; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 11px 22px;
+      border-radius: 8px;
+      font-weight: 600; font-size: 15px;
+      background: var(--blue); color: #fff;
+      border: 1px solid var(--blue);
+      transition: background 120ms ease;
+      text-decoration: none;
+    }
+    .btn:hover { background: var(--blue-ink); color: #fff; text-decoration: none; }
+
+    /* ---------- Footer ---------- */
+    footer {
+      padding: 32px 24px;
+      background: var(--soft);
+      border-top: 1px solid var(--rule);
+    }
+    .footer-inner {
+      max-width: 1080px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 16px; flex-wrap: wrap;
+      font-size: 14px; color: var(--muted);
+    }
+    .footer-inner a { color: var(--muted); margin-left: 24px; }
+    .footer-inner a:first-of-type { margin-left: 0; }
+    .footer-inner a:hover { color: var(--blue); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <div class="nav-brand-group">
+        <a href="#top" class="brand">Xavier Barbouche</a>
+        <a href="mailto:xavierbarbouche@gmail.com" class="btn-sm">Get In Touch</a>
+      </div>
+      <div class="nav-links">
+        <a href="#top" class="active">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#education">Education</a>
+        <a href="ja.html" class="lang-toggle" lang="ja">日本語</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="banner" id="top">
+    <div class="banner-photo" role="img" aria-label="Xavier Barbouche at a Wisconsin Badgers football game"></div>
+    <div class="banner-inner">
+      <h1>About Me</h1>
+      <p class="sub">Xavier Barbouche &middot; Madison, Wisconsin &middot; U.S. &harr; Japan</p>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ============ LEFT: PROSE ============ -->
+    <div class="prose">
+      <p>
+        Hello, my name is Xavier Barbouche. I'm 24, from Madison, Wisconsin, and I'd
+        like to build my career in Japan. Last year I spent nine months in Minowa,
+        Nagano, teaching English to six hundred students at a local school. Since
+        returning to the U.S., I've worked as Chief Data Analyst at a sports-analytics
+        startup. The two roles taught me the same lesson from opposite sides: good
+        systems and good communication are the same problem.
+      </p>
+
+      <h2>My Career</h2>
+      <p>
+        My first real job was as a <strong>Software Development Intern at Forward Health Group</strong>
+        in Madison. For a little over a year I built internal tools and client portals &mdash;
+        the kind of work that isn't glamorous but that helps a small team move faster. It was
+        my first experience shipping something real, for real users, under real deadlines.
+      </p>
+      <p>
+        In August 2024 I moved to <strong>Minowa, Nagano, Japan</strong>, to teach English
+        at <strong>AtoZ Corporation</strong>. For nine months I designed lessons for twelve
+        classes and wrote individual progress reports for over six hundred students at
+        widely different proficiency levels. Teaching in Japan taught me more than Japanese:
+        it taught me how communication, precision, and patience actually work inside a
+        Japanese organization.
+      </p>
+      <p>
+        Since returning to the U.S. in April 2025 I've served as <strong>Chief Data Analyst
+        at a sports-attendance networking startup</strong>. My job is to take decades of
+        messy college-football attendance data &mdash; paper-first, inconsistent, organized
+        by whoever kept the binder &mdash; and turn it into a clean, queryable layer the app
+        can use. I also set the architecture that integrates the legacy numbers with the
+        real-time feeds from games happening now.
+      </p>
+
+      <h2>Why Japan</h2>
+      <p>
+        My interest in Japan is not theoretical. I studied Japanese for four semesters
+        at the University of Wisconsin&ndash;Madison and Japanese culture for another two.
+        I visited twice before moving, and then spent nine months in a small town in
+        Nagano. I left wanting to return &mdash; not out of nostalgia, but with purpose:
+        a real job, at a company I respected, with a role I could grow into over years,
+        not months. <span class="jp">日本の会社で、長く働きたいと考えています。</span>
+      </p>
+
+      <h2>Brief Background</h2>
+      <p>
+        I grew up in Madison, Wisconsin, and did my undergrad at the University of
+        Colorado Boulder before transferring home to the University of Wisconsin&ndash;Madison.
+        I studied economics there, with an emphasis on econometrics &mdash; the part that
+        forces you to be honest with messy real-world data.
+      </p>
+      <p>
+        Outside of work, I'm interested in how tools &mdash; especially the current
+        generation of AI systems &mdash; change what a small team can do. I'm continuing
+        to improve my Japanese, and I spend weekends with friends and family.
+      </p>
+
+    </div>
+
+    <!-- ============ RIGHT: SIDEBAR ============ -->
+    <aside class="sidebar">
+
+      <!-- Headshot -->
+      <div class="headshot-card">
+        <div class="avatar"><img src="xavier.jpg" alt="Xavier Barbouche in Minowa, Nagano"></div>
+      </div>
+
+      <!-- Skills -->
+      <section class="card" id="skills">
+        <h3>Skills</h3>
+
+        <div class="skill-group">
+          <h4>Skills &amp; Specialties</h4>
+          <div class="chips">
+            <span class="chip">Python</span>
+            <span class="chip">SQL</span>
+            <span class="chip">JavaScript</span>
+            <span class="chip">Java</span>
+            <span class="chip">C++</span>
+            <span class="chip">R</span>
+            <span class="chip">HTML/CSS</span>
+            <span class="chip">Data Engineering</span>
+            <span class="chip">AI Tooling</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <h4>AI &amp; Workflow</h4>
+          <div class="chips">
+            <span class="chip">OpenAI</span>
+            <span class="chip">Claude</span>
+            <span class="chip">Gemini</span>
+            <span class="chip">DeepSeek</span>
+            <span class="chip">Excel</span>
+            <span class="chip">Google Workspace</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <h4>Languages</h4>
+          <div class="chips">
+            <span class="chip">English &middot; Native</span>
+            <span class="chip">Japanese &middot; Conversational</span>
+            <span class="chip">French &middot; Conversational</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Certifications (freestanding, with logo marks) -->
+      <section class="card cert-card" id="certifications">
+        <h3>Certifications</h3>
+        <a class="cert-row" href="https://pll.harvard.edu/course/cs50s-introduction-artificial-intelligence-python" target="_blank" rel="noopener">
+          <span class="cert-mark harvard"><img src="logos/harvard.png" alt="" onerror="this.style.display='none'; this.parentElement.classList.add('fallback'); this.parentElement.textContent='H';"></span>
+          <span class="cert-text">
+            <span class="cert-name">Harvard CS50: AI with Python</span>
+            <span class="cert-sub">Harvard University &middot; Online</span>
+          </span>
+        </a>
+        <a class="cert-row" href="https://www.pmi.org/certifications/certified-associate-capm" target="_blank" rel="noopener">
+          <span class="cert-mark pmi"><img src="logos/pmi.png" alt="" onerror="this.style.display='none'; this.parentElement.classList.add('fallback'); this.parentElement.textContent='PMI';"></span>
+          <span class="cert-text">
+            <span class="cert-name">CAPM &mdash; Certified Associate in Project Management</span>
+            <span class="cert-sub">Project Management Institute</span>
+          </span>
+        </a>
+        <a class="cert-row" href="https://www.teflfullcircle.com/courses/120-hour-online-tefl-course/" target="_blank" rel="noopener">
+          <span class="cert-mark tefl"><img src="logos/tefl.svg" alt="" onerror="this.style.display='none'; this.parentElement.classList.add('fallback'); this.parentElement.textContent='TEFL';"></span>
+          <span class="cert-text">
+            <span class="cert-name">TEFL FullCircle &mdash; 120-Hour Online Course</span>
+            <span class="cert-sub">Teaching English as a Foreign Language</span>
+          </span>
+        </a>
+      </section>
+
+      <!-- Experience timeline -->
+      <section class="card" id="experience">
+        <h3>Experience</h3>
+        <div class="timeline">
+          <div class="tl-item">
+            <p class="title">Sports Attendance Startup</p>
+            <p class="role">Chief Data Analyst</p>
+            <p class="desc">April 2025 &mdash; Present. Data pipelines, architecture, and integration of legacy + real-time sports data.</p>
+          </div>
+          <div class="tl-item">
+            <p class="title">AtoZ Corporation</p>
+            <p class="role">English Teacher &middot; Minowa, Nagano</p>
+            <p class="desc">Aug 2024 &mdash; Apr 2025. Curricula for 12 classes, 600+ students, multimedia methods, individual progress assessments.</p>
+          </div>
+          <div class="tl-item">
+            <p class="title">Forward Health Group</p>
+            <p class="role">Software Development Intern &middot; Madison, WI</p>
+            <p class="desc">June 2021 &mdash; Aug 2022. Internal infrastructure, custom web portals, legacy system maintenance.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Education timeline -->
+      <section class="card" id="education">
+        <h3>Education</h3>
+        <div class="timeline">
+          <div class="tl-item">
+            <p class="title">University of Wisconsin&ndash;Madison</p>
+            <p class="role">B.A., Economics &middot; May 2024</p>
+            <p class="desc">Emphasis on econometrics and data analysis. Four semesters of Japanese language, two of Japanese culture.</p>
+          </div>
+          <div class="tl-item">
+            <p class="title">University of Colorado Boulder</p>
+            <p class="role">Economics &middot; 2020 &mdash; 2022</p>
+            <p class="desc">Transferred to UW&ndash;Madison in August 2022.</p>
+          </div>
+          <div class="tl-item">
+            <p class="title">Madison West High School</p>
+            <p class="role">Graduated 2020</p>
+            <p class="desc">ACT 32, 97th percentile.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Let's Connect -->
+      <section class="card connect-card" id="contact">
+        <h3>Let's Connect</h3>
+        <a href="mailto:xavierbarbouche@gmail.com" class="btn">Get In Touch</a>
+      </section>
+
+    </aside>
+
+    <!-- ============ INTERESTS — full-width band, last on mobile ============ -->
+    <section class="interests-block">
+      <div class="prose">
+        <h2>Interests</h2>
+
+        <h3>Sports</h3>
+        <p>
+          American football &mdash; the Minnesota Vikings and the Wisconsin Badgers.
+          International soccer &mdash; I follow the UEFA European Championship and the FIFA World Cup closely.
+        </p>
+        <div class="logo-row">
+          <a class="logo-tile" href="https://www.vikings.com/" target="_blank" rel="noopener" aria-label="Minnesota Vikings">
+            <span class="logo-tile-img"><img src="logos/vikings.png" alt=""></span>
+            <span class="logo-tile-label">Vikings</span>
+          </a>
+          <a class="logo-tile" href="https://uwbadgers.com/sports/football" target="_blank" rel="noopener" aria-label="Wisconsin Badgers">
+            <span class="logo-tile-img"><img src="logos/wisconsin-badgers.png" alt=""></span>
+            <span class="logo-tile-label">Badgers</span>
+          </a>
+          <a class="logo-tile" href="https://www.uefa.com/euro2024/" target="_blank" rel="noopener" aria-label="UEFA European Championship">
+            <span class="logo-tile-img"><img src="logos/uefa-euro.svg" alt=""></span>
+            <span class="logo-tile-label">UEFA Euro</span>
+          </a>
+          <a class="logo-tile" href="https://www.fifa.com/en/tournaments/mens/worldcup" target="_blank" rel="noopener" aria-label="FIFA World Cup">
+            <span class="logo-tile-img"><img src="logos/world-cup.png" alt=""></span>
+            <span class="logo-tile-label">World Cup</span>
+          </a>
+        </div>
+
+        <h3>Video Games</h3>
+        <p>
+          I regularly play a variety of games. Find me on Discord as <code>xlbluefish</code>.
+        </p>
+
+        <h3>Media</h3>
+        <p style="margin-bottom: 6px;">A few favorites &mdash; movies and anime:</p>
+        <div class="poster-grid">
+          <a class="poster-card" href="https://www.imdb.com/title/tt1596363/" target="_blank" rel="noopener">
+            <span class="poster-img" style="background-image: url('posters/the-big-short.png');" aria-hidden="true"></span>
+            <span class="poster-meta">
+              <span class="poster-title">The Big Short</span>
+              <span class="poster-sub">2015 &middot; Film</span>
+            </span>
+          </a>
+          <a class="poster-card" href="https://www.imdb.com/title/tt3659388/" target="_blank" rel="noopener">
+            <span class="poster-img" style="background-image: url('posters/the-martian.webp');" aria-hidden="true"></span>
+            <span class="poster-meta">
+              <span class="poster-title">The Martian</span>
+              <span class="poster-sub">2015 &middot; Film</span>
+            </span>
+          </a>
+          <a class="poster-card" href="https://myanimelist.net/anime/42897/Horimiya" target="_blank" rel="noopener">
+            <span class="poster-img" style="background-image: url('posters/horimiya.jpg');" aria-hidden="true"></span>
+            <span class="poster-meta">
+              <span class="poster-title">Horimiya</span>
+              <span class="poster-sub">2021 &middot; Anime</span>
+            </span>
+          </a>
+          <a class="poster-card" href="https://myanimelist.net/anime/40748/Jujutsu_Kaisen" target="_blank" rel="noopener">
+            <span class="poster-img" style="background-image: url('posters/jujutsu-kaisen.png');" aria-hidden="true"></span>
+            <span class="poster-meta">
+              <span class="poster-title">Jujutsu Kaisen</span>
+              <span class="poster-sub">2020 &middot; Anime</span>
+            </span>
+          </a>
+        </div>
+
+        <h3>YouTube Channels I Like</h3>
+        <div class="yt-grid">
+          <a class="yt-card" href="https://www.youtube.com/@thatsgoodsports" target="_blank" rel="noopener" aria-label="ThatsGoodSports on YouTube">
+            <span class="yt-avatar thatsgood" aria-hidden="true"><img src="logos/yt-thatsgoodsports.jpg" alt=""></span>
+            <span class="yt-meta">
+              <span class="yt-name">ThatsGoodSports</span>
+              <span class="yt-handle">@thatsgoodsports</span>
+              <span class="yt-tag"><svg viewBox="0 0 28 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="28" height="20" rx="4" fill="#FF0000"/><path d="M11 6 L19 10 L11 14 Z" fill="#fff"/></svg> Football comedy</span>
+            </span>
+          </a>
+          <a class="yt-card" href="https://www.youtube.com/@jetlagthegame" target="_blank" rel="noopener" aria-label="Jet Lag: The Game on YouTube">
+            <span class="yt-avatar jetlag" aria-hidden="true"><img src="logos/yt-jetlag.webp" alt=""></span>
+            <span class="yt-meta">
+              <span class="yt-name">Jet Lag: The Game</span>
+              <span class="yt-handle">@jetlagthegame</span>
+              <span class="yt-tag"><svg viewBox="0 0 28 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="28" height="20" rx="4" fill="#FF0000"/><path d="M11 6 L19 10 L11 14 Z" fill="#fff"/></svg> Travel game show</span>
+            </span>
+          </a>
+          <a class="yt-card" href="https://www.youtube.com/@LCS" target="_blank" rel="noopener" aria-label="LCS on YouTube">
+            <span class="yt-avatar lcs" aria-hidden="true"><img src="logos/yt-lcs.png" alt=""></span>
+            <span class="yt-meta">
+              <span class="yt-name">LCS</span>
+              <span class="yt-handle">@LCS</span>
+              <span class="yt-tag"><svg viewBox="0 0 28 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="28" height="20" rx="4" fill="#FF0000"/><path d="M11 6 L19 10 L11 14 Z" fill="#fff"/></svg> League of Legends esports</span>
+            </span>
+          </a>
+          <a class="yt-card" href="https://www.youtube.com/@TheYardPodcast" target="_blank" rel="noopener" aria-label="The Yard on YouTube">
+            <span class="yt-avatar theyard" aria-hidden="true"><img src="logos/yt-theyard.png" alt=""></span>
+            <span class="yt-meta">
+              <span class="yt-name">The Yard</span>
+              <span class="yt-handle">@TheYardPodcast</span>
+              <span class="yt-tag"><svg viewBox="0 0 28 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="28" height="20" rx="4" fill="#FF0000"/><path d="M11 6 L19 10 L11 14 Z" fill="#fff"/></svg> Comedy podcast</span>
+            </span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span>&copy; 2026 Xavier Barbouche.</span>
+      <span>
+        <a href="https://github.com/xavierbarbouche">GitHub</a>
+        <a href="https://www.linkedin.com/in/xavier-barbouche/">LinkedIn</a>
+      </span>
+    </div>
+  </footer>
+
+  <script>
+    // Active nav underline as sections scroll into view
+    (function() {
+      const links = document.querySelectorAll('.nav-links a');
+      const sections = Array.from(links).map(a => {
+        const href = a.getAttribute('href');
+        return href.startsWith('#') ? document.querySelector(href) : null;
+      });
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            links.forEach(l => l.classList.remove('active'));
+            const id = '#' + e.target.id;
+            const match = document.querySelector('.nav-links a[href="' + id + '"]');
+            if (match) match.classList.add('active');
+          }
+        });
+      }, { rootMargin: '-35% 0px -55% 0px', threshold: 0 });
+      sections.forEach(s => { if (s) obs.observe(s); });
+    })();
+  </script>
+</body>
+</html>
