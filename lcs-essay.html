@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The LCS Has an Incentive Problem | Xavier Barbouche</title>
+  <meta name="description" content="Why franchising broke North American League of Legends esports, and what would actually fix it. An essay by Xavier Barbouche.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #0B1220;
+      --body: #1F2937;
+      --muted: #6B7280;
+      --rule: #E5E7EB;
+      --rule-dark: #CBD5E1;
+      --soft: #F8FAFC;
+      --card: #FFFFFF;
+      --bg: #FFFFFF;
+      --banner: linear-gradient(180deg, #EEF2FF 0%, #E8EEFF 100%);
+      --blue: #2563EB;
+      --blue-ink: #1D4ED8;
+      --blue-soft: #DBEAFE;
+      --chip-bg: #F1F5F9;
+
+      /* Editorial accents for this piece */
+      --accent: #D4AF37;          /* LCS / Riot gold-ish */
+      --accent-deep: #B8941F;
+      --warn: #DC2626;             /* loss / strikethrough */
+      --warn-soft: #FEE2E2;
+      --good: #059669;             /* win / sustainable */
+      --good-soft: #D1FAE5;
+      --neutral: #4B5563;
+      --ink-soft: #F3F4F6;
+
+      /* Brand tints (used inside infographics) */
+      --lol-tint: #C8AA6E;
+      --lol-dark: #0A1428;
+      --val-tint: #FF4655;
+      --val-dark: #1A1A2E;
+      --r6-tint: #1B7CB3;
+      --r6-dark: #0E1F2A;
+      --pl-tint: #38003C;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--body);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { color: var(--blue-ink); text-decoration: underline; }
+
+    /* ---------- Nav (matches index.html) ---------- */
+    nav {
+      position: sticky; top: 0; z-index: 20;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: saturate(140%) blur(10px);
+      border-bottom: 1px solid var(--rule);
+    }
+    .nav-inner {
+      max-width: 1080px; margin: 0 auto;
+      padding: 16px 24px;
+      display: flex; align-items: center; justify-content: space-between; gap: 24px;
+    }
+    .brand { color: var(--ink); font-weight: 700; font-size: 18px; letter-spacing: -0.01em; }
+    .nav-brand-group { display: flex; align-items: center; gap: 16px; }
+    .btn-sm {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 7px 14px;
+      border-radius: 7px;
+      font-weight: 600; font-size: 13px;
+      background: var(--blue); color: #fff;
+      border: 1px solid var(--blue);
+      transition: background 120ms ease;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .btn-sm:hover { background: var(--blue-ink); color: #fff; text-decoration: none; }
+    .nav-links { display: flex; gap: 28px; align-items: center; }
+    .nav-links a {
+      color: var(--body); font-weight: 500; font-size: 15px;
+      padding: 6px 2px;
+      border-bottom: 2px solid transparent;
+      text-decoration: none;
+      transition: border-color 120ms ease, color 120ms ease;
+    }
+    .nav-links a.active { color: var(--blue); border-bottom-color: var(--blue); }
+    .nav-links a:hover { color: var(--blue); text-decoration: none; }
+    .nav-links a.lang-toggle {
+      padding: 5px 12px;
+      border: 1px solid var(--rule);
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--muted);
+    }
+    .nav-links a.lang-toggle:hover {
+      border-color: var(--blue);
+      color: var(--blue);
+      background: var(--blue-soft);
+    }
+    @media (max-width: 640px) {
+      .nav-links { gap: 16px; }
+      .nav-links a { font-size: 14px; }
+      .nav-links a:nth-child(n+5):not(.lang-toggle) { display: none; }
+    }
+
+    /* ---------- Article hero ---------- */
+    .article-hero {
+      background: linear-gradient(180deg, #0A1428 0%, #1A2540 100%);
+      color: #fff;
+      padding: 72px 24px 88px;
+      position: relative;
+      overflow: hidden;
+    }
+    .article-hero::before {
+      content: "";
+      position: absolute;
+      top: 0; right: -120px;
+      width: 480px; height: 480px;
+      background: radial-gradient(circle, rgba(212,175,55,0.18) 0%, rgba(212,175,55,0) 70%);
+      pointer-events: none;
+    }
+    .article-hero-inner {
+      position: relative; z-index: 1;
+      max-width: 760px; margin: 0 auto;
+    }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 11px; font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase; letter-spacing: 0.16em;
+      margin-bottom: 22px;
+    }
+    .eyebrow .pip {
+      width: 6px; height: 6px;
+      border-radius: 50%; background: var(--accent);
+    }
+    .article-hero h1 {
+      font-family: 'Source Serif 4', 'Source Serif Pro', Georgia, serif;
+      font-size: 56px; font-weight: 700;
+      line-height: 1.08; letter-spacing: -0.02em;
+      color: #fff;
+      margin: 0 0 18px;
+    }
+    .article-hero .deck {
+      font-size: 20px; line-height: 1.5;
+      color: #C8D0DD;
+      margin: 0 0 32px;
+      font-weight: 400;
+      max-width: 56ch;
+    }
+    .article-hero .byline {
+      display: flex; align-items: center; gap: 16px;
+      font-size: 14px; color: #8A95A8;
+    }
+    .article-hero .byline strong { color: #fff; font-weight: 600; }
+    .article-hero .byline .sep {
+      width: 1px; height: 14px; background: #3A4458;
+    }
+    @media (max-width: 640px) {
+      .article-hero { padding: 56px 20px 64px; }
+      .article-hero h1 { font-size: 36px; }
+      .article-hero .deck { font-size: 17px; }
+    }
+
+    /* ---------- Reading column ---------- */
+    main {
+      max-width: 720px; margin: 0 auto;
+      padding: 56px 24px 32px;
+    }
+    @media (max-width: 640px) {
+      main { padding: 40px 20px 24px; }
+    }
+
+    .intro {
+      font-family: 'Source Serif 4', 'Source Serif Pro', Georgia, serif;
+      font-size: 22px; line-height: 1.55;
+      color: var(--ink);
+      margin: 0 0 48px;
+      font-weight: 400;
+    }
+    .intro::first-letter {
+      font-weight: 700;
+      font-size: 64px;
+      float: left;
+      line-height: 0.95;
+      margin: 4px 12px 0 0;
+      color: var(--accent-deep);
+    }
+    @media (max-width: 640px) {
+      .intro { font-size: 19px; }
+      .intro::first-letter { font-size: 54px; }
+    }
+
+    .section { margin: 48px 0; }
+    .section-label {
+      display: inline-block;
+      font-family: 'JetBrains Mono', 'SF Mono', Menlo, monospace;
+      font-size: 11px; font-weight: 700;
+      color: var(--accent-deep);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .section h2 {
+      font-family: 'Source Serif 4', 'Source Serif Pro', Georgia, serif;
+      font-size: 32px; font-weight: 700;
+      line-height: 1.2; letter-spacing: -0.01em;
+      color: var(--ink);
+      margin: 0 0 20px;
+    }
+    @media (max-width: 640px) {
+      .section h2 { font-size: 26px; }
+    }
+
+    .prose {
+      font-family: 'Source Serif 4', 'Source Serif Pro', Georgia, serif;
+      font-size: 18px;
+      line-height: 1.72;
+      color: var(--body);
+    }
+    .prose p { margin: 0 0 22px; }
+    .prose p:last-child { margin-bottom: 0; }
+    .prose strong { color: var(--ink); font-weight: 600; }
+    .prose em { font-style: italic; }
+
+    /* Pull quote */
+    .pullquote {
+      margin: 40px -8px 40px;
+      padding: 28px 32px;
+      border-left: 4px solid var(--accent);
+      background: linear-gradient(90deg, rgba(212,175,55,0.08) 0%, rgba(212,175,55,0) 100%);
+      font-family: 'Source Serif 4', 'Source Serif Pro', Georgia, serif;
+      font-size: 26px;
+      line-height: 1.35;
+      color: var(--ink);
+      font-weight: 500;
+      font-style: italic;
+    }
+    .pullquote.closing {
+      border-left-color: var(--ink);
+      background: linear-gradient(90deg, rgba(11,18,32,0.06) 0%, rgba(11,18,32,0) 100%);
+      font-size: 28px;
+      font-weight: 600;
+      font-style: normal;
+    }
+    @media (max-width: 640px) {
+      .pullquote { font-size: 22px; padding: 24px 20px; margin: 32px 0; }
+      .pullquote.closing { font-size: 24px; }
+    }
+
+    /* ---------- Infographic — break out of reading column ---------- */
+    .infographic {
+      margin: 40px -60px;
+      padding: 0;
+    }
+    @media (max-width: 900px) {
+      .infographic { margin: 40px 0; }
+    }
+    .infographic-frame {
+      background: var(--soft);
+      border: 1px solid var(--rule);
+      border-radius: 14px;
+      padding: 28px 28px 24px;
+    }
+    .infographic-caption {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 12px;
+      padding: 0 8px;
+      line-height: 1.5;
+    }
+    .infographic-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px; font-weight: 700;
+      color: var(--accent-deep);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin: 0 0 18px;
+    }
+
+    /* Infographic 1 — The dominant strategy bar */
+    .bar-chart { display: flex; flex-direction: column; gap: 14px; }
+    .bar-row { display: flex; align-items: center; gap: 12px; }
+    .bar-label {
+      flex: 0 0 130px;
+      font-size: 12px; font-weight: 600;
+      color: var(--ink);
+      text-align: right;
+    }
+    .bar-track {
+      flex: 1;
+      height: 30px;
+      background: var(--ink-soft);
+      border-radius: 6px;
+      position: relative;
+      overflow: hidden;
+    }
+    .bar-fill {
+      height: 100%; border-radius: 6px;
+      display: flex; align-items: center; padding: 0 12px;
+      font-size: 12px; font-weight: 700;
+      color: #fff;
+    }
+    .bar-fill.payout { background: var(--accent); width: 100%; }
+    .bar-fill.spend-low { background: var(--good); width: 60%; }
+    .bar-fill.spend-high { background: var(--warn); width: 105%; max-width: 100%; }
+    .bar-result {
+      flex: 0 0 80px;
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .bar-result.win { color: var(--good); }
+    .bar-result.lose { color: var(--warn); }
+    @media (max-width: 640px) {
+      .bar-label { flex: 0 0 90px; font-size: 11px; }
+      .bar-result { flex: 0 0 60px; font-size: 10px; }
+    }
+
+    /* Infographic 2 — Sponsorship logos (greyed) */
+    .sponsor-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+    .sponsor-card {
+      background: #fff;
+      border: 1px solid var(--rule);
+      border-radius: 10px;
+      padding: 22px 14px 16px;
+      text-align: center;
+      filter: grayscale(0.85);
+      opacity: 0.75;
+      position: relative;
+    }
+    .sponsor-logo {
+      height: 36px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 10px;
+    }
+    .sponsor-logo img { max-height: 100%; max-width: 80%; object-fit: contain; }
+    .sponsor-logo .fallback {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700; font-size: 16px;
+      color: var(--neutral);
+      letter-spacing: 0.04em;
+    }
+    .sponsor-card .label {
+      font-size: 11px; color: var(--muted);
+      text-transform: uppercase; letter-spacing: 0.08em;
+      font-weight: 600;
+    }
+    .sponsor-question {
+      text-align: center;
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 17px;
+      font-style: italic;
+      color: var(--ink);
+      margin: 14px 0 0;
+    }
+    @media (max-width: 540px) {
+      .sponsor-row { grid-template-columns: 1fr; gap: 10px; }
+    }
+
+    /* Infographic 3 — Three-way comparison table */
+    .compare-table {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr 1fr 1fr;
+      gap: 0;
+      border: 1px solid var(--rule);
+      border-radius: 12px;
+      overflow: hidden;
+      background: #fff;
+    }
+    .ct-cell {
+      padding: 14px 14px;
+      border-right: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+      font-size: 13px;
+      display: flex; align-items: center;
+    }
+    .ct-cell:nth-child(4n) { border-right: none; }
+    .compare-table > .ct-cell:nth-last-child(-n+4) { border-bottom: none; }
+    .ct-cell.header {
+      flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 18px 10px 14px;
+      background: var(--ink-soft);
+      font-weight: 700;
+      text-align: center;
+      gap: 8px;
+    }
+    .ct-cell.header.corner {
+      background: var(--soft);
+      align-items: flex-start; justify-content: flex-end;
+      flex-direction: row;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding-bottom: 18px;
+    }
+    .ct-logo {
+      height: 28px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .ct-logo img { max-height: 100%; max-width: 90%; object-fit: contain; }
+    .ct-logo .fallback {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700; font-size: 13px;
+      padding: 4px 10px;
+      border-radius: 4px;
+      color: #fff;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+    }
+    .ct-logo .fallback.lol { background: var(--lol-dark); color: var(--lol-tint); border: 1px solid var(--lol-tint); }
+    .ct-logo .fallback.val { background: var(--val-dark); color: var(--val-tint); border: 1px solid var(--val-tint); }
+    .ct-logo .fallback.r6 { background: var(--r6-dark); color: #fff; border: 1px solid var(--r6-tint); }
+    .ct-game {
+      font-size: 12px;
+      color: var(--ink);
+    }
+    .ct-row-label {
+      font-weight: 600;
+      color: var(--ink);
+      font-size: 12px;
+      background: var(--soft);
+    }
+    .ct-value {
+      flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      font-size: 13px;
+      gap: 4px;
+    }
+    .ct-mark {
+      font-size: 22px; line-height: 1;
+      font-weight: 700;
+    }
+    .ct-mark.no { color: var(--warn); }
+    .ct-mark.yes { color: var(--good); }
+    .ct-sub {
+      font-size: 11px;
+      color: var(--muted);
+      font-weight: 500;
+    }
+    @media (max-width: 640px) {
+      .compare-table { grid-template-columns: 1fr 1fr 1fr 1fr; }
+      .ct-cell { padding: 10px 6px; font-size: 11px; }
+      .ct-row-label { font-size: 11px; }
+      .ct-sub { font-size: 10px; }
+      .ct-logo .fallback { font-size: 10px; padding: 3px 6px; }
+    }
+
+    /* Infographic 4 — Promotion vs Franchise diagram */
+    .league-models {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    @media (max-width: 640px) {
+      .league-models { grid-template-columns: 1fr; gap: 14px; }
+    }
+    .league-model {
+      background: #fff;
+      border: 1px solid var(--rule);
+      border-radius: 10px;
+      padding: 20px 18px;
+    }
+    .league-model h4 {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px; font-weight: 700;
+      color: var(--ink);
+      text-transform: uppercase; letter-spacing: 0.08em;
+      margin: 0 0 4px;
+    }
+    .league-model .lm-sub {
+      font-size: 11px;
+      color: var(--muted);
+      margin: 0 0 16px;
+      font-weight: 500;
+    }
+    .lm-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+    }
+    .lm-team-box {
+      aspect-ratio: 1.4 / 1;
+      background: var(--ink-soft);
+      border: 1px solid var(--rule);
+      border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 9px;
+      font-weight: 700;
+      color: var(--neutral);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .lm-team-box.locked { background: var(--ink-soft); }
+    .lm-pyramid {
+      display: flex; flex-direction: column; gap: 4px;
+      align-items: center;
+    }
+    .lm-tier {
+      display: flex; gap: 4px; justify-content: center;
+      align-items: center;
+    }
+    .lm-tier .lm-team-box {
+      width: 32px; height: 24px;
+    }
+    .lm-tier.t1 .lm-team-box { background: var(--good-soft); border-color: var(--good); color: var(--good); }
+    .lm-tier.t2 .lm-team-box { background: var(--ink-soft); }
+    .lm-tier.t3 .lm-team-box { background: var(--warn-soft); border-color: var(--warn); color: var(--warn); opacity: 0.85; }
+    .lm-arrows {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      margin: 4px 0;
+      letter-spacing: 0.1em;
+    }
+    .lm-footer {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 12px;
+      font-style: italic;
+    }
+
+    /* Infographic 5 — The fix manifesto */
+    .fix-manifesto {
+      counter-reset: fix;
+      display: flex; flex-direction: column;
+      gap: 14px;
+      margin: 32px 0 16px;
+    }
+    .fix-step {
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 16px;
+      align-items: start;
+      padding: 18px 18px;
+      background: linear-gradient(90deg, rgba(212,175,55,0.06) 0%, rgba(212,175,55,0) 60%);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+      counter-increment: fix;
+    }
+    .fix-step::before {
+      content: counter(fix, decimal-leading-zero);
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      font-size: 22px;
+      color: var(--accent-deep);
+      line-height: 1;
+    }
+    .fix-step-body strong {
+      display: block;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+    .fix-step-body span {
+      font-size: 14px;
+      color: var(--body);
+      line-height: 1.5;
+    }
+
+    /* End slug */
+    .end-slug {
+      text-align: center;
+      margin: 56px 0 0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 0.3em;
+    }
+
+    /* ---------- Footer ---------- */
+    footer {
+      padding: 32px 24px;
+      background: var(--soft);
+      border-top: 1px solid var(--rule);
+      margin-top: 48px;
+    }
+    .footer-inner {
+      max-width: 1080px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 16px; flex-wrap: wrap;
+      font-size: 14px; color: var(--muted);
+    }
+    .footer-inner a { color: var(--muted); margin-left: 24px; }
+    .footer-inner a:first-of-type { margin-left: 0; }
+    .footer-inner a:hover { color: var(--blue); text-decoration: none; }
+
+    /* Back to essays link below article */
+    .back-link {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 24px 24px 0;
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .back-link a {
+      color: var(--blue);
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <div class="nav-brand-group">
+        <a href="index.html" class="brand">Xavier Barbouche</a>
+        <a href="mailto:xavierbarbouche@gmail.com" class="btn-sm">Get In Touch</a>
+      </div>
+      <div class="nav-links">
+        <a href="index.html#top">About</a>
+        <a href="index.html#experience">Experience</a>
+        <a href="index.html#education">Education</a>
+        <a href="essays.html" class="active">Essays</a>
+        <a href="ja.html" class="lang-toggle" lang="ja">日本語</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="article-hero">
+    <div class="article-hero-inner">
+      <div class="eyebrow">
+        <span class="pip" aria-hidden="true"></span>
+        <span>Essay &middot; Esports &amp; Business</span>
+      </div>
+      <h1>The LCS Has an Incentive Problem</h1>
+      <p class="deck">Why franchising broke North American <em>League of Legends</em> esports, and one path that could fix it.</p>
+      <div class="byline">
+        <span><strong>Xavier Barbouche</strong></span>
+        <span class="sep" aria-hidden="true"></span>
+        <span>May 2026</span>
+        <span class="sep" aria-hidden="true"></span>
+        <span>7 min read</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <p class="intro">
+      The LCS, Riot's North American <em>League of Legends</em> esports league, has a viewership problem, which is really a money problem. The teams aren't making money. The league isn't making money either. Riot, the parent company, is doing fine. They're letting the LCS bleed because it works as advertising for the game, or because the cost is small enough to ignore in the scope of Riot's overall business. Either way, the league itself is not in a healthy state, and nobody seems sure what to do about it. I think the answer is sitting right next to League in Riot's own catalog: the way Valorant does esports.
+    </p>
+
+    <!-- ============== SECTION 1: THE FRANCHISING TRAP ============== -->
+    <section class="section">
+      <span class="section-label">01 &nbsp;&middot;&nbsp; The diagnosis</span>
+      <h2>The franchising trap</h2>
+      <div class="prose">
+        <p>
+          When Riot rolled out franchising, the pitch was financial stability. Teams would get baseline funding, the league would stop hemorrhaging, the ecosystem could plan long term. It worked, sort of. The teams did get stable. But stability isn't the same thing as health, and the side effect was worse than anyone wants to admit.
+        </p>
+        <p>
+          Franchising didn't openly remove the incentive to compete. The economics did, quietly.
+        </p>
+        <p>
+          Look at Dignitas. They sit at the bottom of the league every split, pay very low salaries, never recruit rookies, never put up a real fight. From a fan's perspective, that's miserable. From a business perspective, it's the dominant strategy. Spending less than Riot's franchise payout means you make money. Spending more means you lose money. So every team that isn't seriously contending for an international slot just minimizes spend and collects the check.
+        </p>
+      </div>
+
+      <figure class="infographic">
+        <div class="infographic-frame">
+          <p class="infographic-title">The dominant strategy</p>
+          <div class="bar-chart">
+            <div class="bar-row">
+              <div class="bar-label">Riot's payout</div>
+              <div class="bar-track"><div class="bar-fill payout">Franchise check</div></div>
+              <div class="bar-result"></div>
+            </div>
+            <div class="bar-row">
+              <div class="bar-label">Spend less</div>
+              <div class="bar-track"><div class="bar-fill spend-low">Minimum-viable roster</div></div>
+              <div class="bar-result win">Profit</div>
+            </div>
+            <div class="bar-row">
+              <div class="bar-label">Spend to win</div>
+              <div class="bar-track"><div class="bar-fill spend-high">Real roster, coaches, infra</div></div>
+              <div class="bar-result lose">Loss</div>
+            </div>
+          </div>
+          <p class="infographic-caption">If your costs stay below the franchise payout, you profit by doing nothing. The only way to lose money is to <em>try.</em></p>
+        </div>
+      </figure>
+
+      <div class="prose">
+        <p>
+          Cloud9 stays near the top because they spend a little more than the floor, but they still get walloped at international competition, because the entire league has been racing each other to the bottom for years.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============== SECTION 2: SPONSORSHIPS ARE CHEAP ============== -->
+    <section class="section">
+      <span class="section-label">02 &nbsp;&middot;&nbsp; The ceiling</span>
+      <h2>Sponsorships are cheap</h2>
+      <div class="prose">
+        <p>
+          Sponsorships will always be there. Any sport that gets viewers gets sponsors, and the LCS still gets viewers. The problem isn't that sponsorships are missing. It's that they pay less than they would in any other major league, because <em>League of Legends</em> viewers don't spend money the way other sports' audiences do.
+        </p>
+      </div>
+
+      <figure class="infographic">
+        <div class="infographic-frame">
+          <p class="infographic-title">A snapshot of LCS sponsor categories</p>
+          <div class="sponsor-row">
+            <div class="sponsor-card">
+              <div class="sponsor-logo">
+                <img src="logos/razer.png" alt="Razer" onerror="this.style.display='none'; this.parentElement.innerHTML = '<span class=&quot;fallback&quot;>RAZER</span>';">
+              </div>
+              <div class="label">Peripherals &middot; Multiple teams &middot; <em>some fans actually buy this</em></div>
+            </div>
+            <div class="sponsor-card">
+              <div class="sponsor-logo">
+                <img src="logos/progressive.png" alt="Progressive" onerror="this.style.display='none'; this.parentElement.innerHTML = '<span class=&quot;fallback&quot;>PROGRESSIVE</span>';">
+              </div>
+              <div class="label">Insurance &middot; Immortals &middot; <em>nobody switches insurance for esports</em></div>
+            </div>
+            <div class="sponsor-card">
+              <div class="sponsor-logo">
+                <img src="logos/lexus.png" alt="Lexus" onerror="this.style.display='none'; this.parentElement.innerHTML = '<span class=&quot;fallback&quot;>LEXUS</span>';">
+              </div>
+              <div class="label">Car brand &middot; 100 Thieves &middot; <em>brand-awareness play, not unit sales</em></div>
+            </div>
+          </div>
+          <p class="sponsor-question">Even the best of these doesn't pay like a real league.</p>
+        </div>
+      </figure>
+
+      <div class="prose">
+        <p>
+          The pattern that emerges: the only sponsorships that work even a little are peripherals, like Razer keyboards or gaming mice. Some fans do actually buy the gear. Insurance sponsorships are dead on arrival (Immortals had Progressive a few seasons back; nobody switched). Car brands like Lexus on 100 Thieves, or Cadillac on TSM in earlier years, only make sense as brand-awareness plays, the same way Toyota sponsors a marathon. Brand-awareness money is a different financial product, and there isn't enough of it to fund the league.
+        </p>
+        <p>
+          So if sponsorships are there but cheap, what brings in the real money? What is the thing players actually buy?
+        </p>
+        <p>
+          <strong>Skins.</strong>
+        </p>
+      </div>
+    </section>
+
+    <!-- ============== SECTION 3: THE VALORANT / R6 MODEL ============== -->
+    <section class="section">
+      <span class="section-label">03 &nbsp;&middot;&nbsp; The working model</span>
+      <h2>What Valorant and Rainbow Six already figured out</h2>
+      <div class="prose">
+        <p>
+          The strangest part of this whole story is that Riot has already solved it. They built the working answer themselves, in their own next-door game.
+        </p>
+        <p>
+          Valorant ships team-branded esports skins in the in-game shop. Players who are fans of a team buy that team's skin. The transaction runs publisher &rarr; team &rarr; fan, and everyone gets a cut. Riot has proudly published that partnered VCT teams received over $1 million from skin-bundle sales last year. That's less than half of the total revenue from those bundles, but it's real money flowing directly to the teams. Riot keeps the majority. The teams get a revenue stream that actually scales with fan engagement, instead of being capped at whatever a sponsor will pay.
+        </p>
+        <p>
+          But somehow, in <em>League</em>, Riot has decided the in-game cosmetic well is off-limits for team branding. Same studio. Same building. Same proven mechanism, two doors down. Just not applied to the game that needs it.
+        </p>
+      </div>
+
+      <figure class="infographic">
+        <div class="infographic-frame">
+          <p class="infographic-title">Three different esports business models, side by side</p>
+          <div class="compare-table">
+            <div class="ct-cell header corner">vs.</div>
+            <div class="ct-cell header">
+              <div class="ct-logo">
+                <img src="logos/league.png" alt="League of Legends" onerror="this.style.display='none'; this.parentElement.innerHTML = '<span class=&quot;fallback lol&quot;>LoL</span>';">
+              </div>
+              <div class="ct-game">League of Legends</div>
+            </div>
+            <div class="ct-cell header">
+              <div class="ct-logo">
+                <img src="logos/valorant.png" alt="Valorant" onerror="this.style.display='none'; this.parentElement.innerHTML = '<span class=&quot;fallback val&quot;>VAL</span>';">
+              </div>
+              <div class="ct-game">Valorant</div>
+            </div>
+            <div class="ct-cell header">
+              <div class="ct-logo">
+                <img src="logos/rainbow-six.png" alt="Rainbow Six Siege" onerror="this.style.display='none'; this.parentElement.innerHTML = '<span class=&quot;fallback r6&quot;>R6</span>';">
+              </div>
+              <div class="ct-game">Rainbow Six</div>
+            </div>
+
+            <div class="ct-cell ct-row-label">Team-branded skins in shop?</div>
+            <div class="ct-cell ct-value"><span class="ct-mark no">&times;</span><span class="ct-sub">No</span></div>
+            <div class="ct-cell ct-value"><span class="ct-mark yes">&check;</span><span class="ct-sub">Yes</span></div>
+            <div class="ct-cell ct-value"><span class="ct-mark yes">&check;</span><span class="ct-sub">Yes</span></div>
+
+            <div class="ct-cell ct-row-label">Teams funded by</div>
+            <div class="ct-cell ct-value"><span>Sponsors &amp;</span><span class="ct-sub">franchise check</span></div>
+            <div class="ct-cell ct-value"><span>Same +</span><span class="ct-sub">skin revenue</span></div>
+            <div class="ct-cell ct-value"><span>Same +</span><span class="ct-sub">skin revenue</span></div>
+
+            <div class="ct-cell ct-row-label">League health</div>
+            <div class="ct-cell ct-value"><span style="color: var(--warn); font-weight: 600;">Losing money</span></div>
+            <div class="ct-cell ct-value"><span style="color: var(--good); font-weight: 600;">Sustainable</span></div>
+            <div class="ct-cell ct-value"><span style="color: var(--good); font-weight: 600;">Affordable for teams</span></div>
+          </div>
+          <p class="infographic-caption">Two of these models scale. One doesn't. Riot built both kinds of league. It just refuses to apply the working one to League.</p>
+        </div>
+      </figure>
+
+      <div class="prose">
+        <p>
+          Rainbow Six Siege does it on a slightly different model. The result is a league that is, by reputation, <em>infamously affordable from a team perspective</em>. Player salaries are largely funded by skin revenue, which keeps team operating costs in a range that actually makes sense. The teams aren't begging for sponsorships to survive. Right now, in mid-May, Rainbow Six's Salt Lake City Major has a couple thousand people in an arena. It's not Madison Square Garden, but it's not nothing, and the model behind it is sustainable.
+        </p>
+      </div>
+
+      <blockquote class="pullquote">
+        In League, Riot won't do it. I genuinely don't know why.
+      </blockquote>
+    </section>
+
+    <!-- ============== SECTION 4: PROMOTION AND RELEGATION ============== -->
+    <section class="section">
+      <span class="section-label">04 &nbsp;&middot;&nbsp; The structural fix</span>
+      <h2>Bring back promotion and relegation</h2>
+      <div class="prose">
+        <p>
+          The other half of the fix is harder, but just as necessary. Franchising has to go. Or more precisely, promotion and relegation have to come back. The LCS used to have them, before 2018. The Challenger Series was the feeder league, and bottom-of-LCS teams could be relegated out and replaced by Challenger winners. Franchising shut that pipeline.
+        </p>
+        <p>
+          What you want, what every league that's ever worked at any scale wants, is a way for popularity to compound. The NFL and the NBA can afford to franchise because they've already built fifty years of fandom. The Dallas Cowboys are the most popular team in the NFL because they're the most popular team in the NFL. Popularity feeds itself. When a new fan picks up the sport, they find the popular name first, become a fan of that name, tell their friends, and the snowball rolls. TSM had it in 2015. Cloud9 has some version of it now. But the snowball needs to be allowed to roll, and franchising freezes it.
+        </p>
+      </div>
+
+      <figure class="infographic">
+        <div class="infographic-frame">
+          <p class="infographic-title">Closed franchise vs.&nbsp;open promotion</p>
+          <div class="league-models">
+            <div class="league-model">
+              <h4>LCS &middot; Franchise</h4>
+              <p class="lm-sub">8 teams. Forever. No demotion. No promotion. No movement.</p>
+              <div class="lm-grid">
+                <div class="lm-team-box locked">T1</div>
+                <div class="lm-team-box locked">T2</div>
+                <div class="lm-team-box locked">T3</div>
+                <div class="lm-team-box locked">T4</div>
+                <div class="lm-team-box locked">T5</div>
+                <div class="lm-team-box locked">T6</div>
+                <div class="lm-team-box locked">T7</div>
+                <div class="lm-team-box locked">T8</div>
+              </div>
+              <p class="lm-footer">No reward for being popular. No penalty for being bad.</p>
+            </div>
+            <div class="league-model">
+              <h4>Premier League &middot; Pro / Rel</h4>
+              <p class="lm-sub">Top league earned each year. Bottom three fall. Top three rise.</p>
+              <div class="lm-pyramid">
+                <div class="lm-tier t1">
+                  <div class="lm-team-box">A</div>
+                  <div class="lm-team-box">B</div>
+                  <div class="lm-team-box">C</div>
+                </div>
+                <div class="lm-tier t1">
+                  <div class="lm-team-box">D</div>
+                  <div class="lm-team-box">E</div>
+                </div>
+                <div class="lm-arrows">&uarr; &nbsp; promotion &nbsp; &darr;</div>
+                <div class="lm-tier t2">
+                  <div class="lm-team-box">F</div>
+                  <div class="lm-team-box">G</div>
+                  <div class="lm-team-box">H</div>
+                </div>
+                <div class="lm-tier t3">
+                  <div class="lm-team-box">I</div>
+                  <div class="lm-team-box">J</div>
+                  <div class="lm-team-box">K</div>
+                </div>
+              </div>
+              <p class="lm-footer">Popularity matters. Performance matters. Spots are <em>earned.</em></p>
+            </div>
+          </div>
+        </div>
+      </figure>
+
+      <div class="prose">
+        <p>
+          The Premier League model, actual promotion and relegation, does the opposite. Teams that are bad and unpopular fall out of the top league. Teams that are good and growing get promoted up. You don't have to be the same eight teams forever. New rosters with new players get a real shot. Disguised Toast's DSG team is the best evidence inside League right now that fresh faces draw fresh fans. Tarik's recent showmatch outdrew the entire LCS season in a single event. The signal could not be louder.
+        </p>
+        <p>
+          And it's worth noting: Europe's LEC still uses the franchise model, but the European ecosystem doesn't have North America's tier-2 problem. Each European country has its own regional league, and those regional leagues are popular. The best teams from them get pulled up into the LEC. The pipeline is real, and the regional-league hype carries into tier 1.
+        </p>
+        <p>
+          North America has one tier-2 league for the entire continent. Nobody watches it. So there's no hype feeding up, and the LCS has to be inherently good on its own, which right now, it isn't. Bringing back promotion and relegation does part of the job, but North America also needs the regional-leagues feeder system to start running, or for the tier-2 to become something worth watching on its own terms.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============== SECTION 5: THE POLITICAL PROBLEM ============== -->
+    <section class="section">
+      <span class="section-label">05 &nbsp;&middot;&nbsp; The cost</span>
+      <h2>What it costs Riot to fix this</h2>
+      <div class="prose">
+        <p>
+          None of this is free for Riot. Every team that paid the partnership fee to be in the franchised league is owed something if Riot walks the deal back. Riot has to either eat the payout or, in a worst-case version, shutter the league entirely. Shuttering is painful but possible. Eating the payout is also painful, but it's the price of admission to a healthy ecosystem.
+        </p>
+        <p>
+          The alternative is what we have now: a league that is slowly losing money for everyone in it, with no path to growth, no incentive to compete, and no reward for being popular. The current path ends with the league quietly dying, or being mercy-killed.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============== SECTION 6: THE FIX ============== -->
+    <section class="section">
+      <span class="section-label">06 &nbsp;&middot;&nbsp; The manifesto</span>
+      <h2>The fix isn't mysterious</h2>
+      <div class="prose">
+        <p>
+          Riot has built the working model already, two doors down, in Valorant. The fix is to copy it, and then go further.
+        </p>
+      </div>
+
+      <ol class="fix-manifesto" style="list-style: none; padding: 0;">
+        <li class="fix-step">
+          <div class="fix-step-body">
+            <strong>Put team-branded esports skins in the in-game shop.</strong>
+            <span>Each team designs one. Riot approves it. Players who are fans buy it. The transaction runs publisher &rarr; team &rarr; fan, the way it does in Valorant and Rainbow Six.</span>
+          </div>
+        </li>
+        <li class="fix-step">
+          <div class="fix-step-body">
+            <strong>Cut the baseline franchise funding.</strong>
+            <span>Teams have to compete for revenue, not coast on a check. The skin-revenue split replaces the franchise check, and only popular teams thrive.</span>
+          </div>
+        </li>
+        <li class="fix-step">
+          <div class="fix-step-body">
+            <strong>Eat the partnership payout owed to the existing teams.</strong>
+            <span>This is the political cost. Riot signed the deal; Riot has to pay to undo it. There is no shortcut around this.</span>
+          </div>
+        </li>
+        <li class="fix-step">
+          <div class="fix-step-body">
+            <strong>Bring back promotion and relegation.</strong>
+            <span>The LCS had it before 2018. The Premier League still does. Bad teams fall. Good teams rise. Fresh rosters get a real shot, the way DSG just demonstrated. Popularity gets to compound the way it does in every healthy league.</span>
+          </div>
+        </li>
+      </ol>
+
+      <blockquote class="pullquote closing">
+        You need an incentive to be popular. The LCS teams don't have one. Until they do, nothing else will fix it.
+      </blockquote>
+
+      <p class="end-slug">&loz; &nbsp;&middot;&nbsp; &loz; &nbsp;&middot;&nbsp; &loz;</p>
+    </section>
+
+  </main>
+
+  <div class="back-link">
+    <a href="essays.html">&larr; Back to Essays</a>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <span>&copy; 2026 Xavier Barbouche.</span>
+      <span>
+        <a href="https://github.com/xavierbarbouche">GitHub</a>
+        <a href="https://www.linkedin.com/in/xavierbarbouche/">LinkedIn</a>
+      </span>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Take the Money Out</title>
+<style>
+  :root {
+    --bg: #F7F5F1;
+    --ink: #1A1A1A;
+    --muted: #6B6F75;
+    --accent: #C85A2E;
+    --accent-soft: #E8A87C;
+    --rule: #D9D3C7;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: Georgia, 'Iowan Old Style', 'Palatino Linotype', serif;
+    font-size: 18px;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 64px 28px 96px;
+  }
+  .eyebrow {
+    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 18px 0;
+  }
+  h1 {
+    font-family: Georgia, serif;
+    font-size: 56px;
+    line-height: 1.05;
+    font-weight: normal;
+    margin: 0 0 14px 0;
+    letter-spacing: -0.01em;
+  }
+  .dek {
+    font-style: italic;
+    color: var(--muted);
+    font-size: 21px;
+    line-height: 1.5;
+    margin: 0 0 56px 0;
+  }
+  .hero {
+    margin: 0 auto 56px auto;
+    display: block;
+    width: 100%;
+    max-width: 520px;
+  }
+  p { margin: 0 0 22px 0; }
+  .lede::first-letter {
+    font-family: Georgia, serif;
+    font-size: 72px;
+    line-height: 0.85;
+    float: left;
+    padding: 6px 12px 0 0;
+    color: var(--accent);
+  }
+  em { color: var(--ink); }
+  .pull {
+    margin: 36px 0;
+    padding: 6px 0 6px 24px;
+    border-left: 3px solid var(--accent);
+    font-size: 24px;
+    line-height: 1.4;
+    color: var(--ink);
+    font-style: italic;
+  }
+  .pull strong {
+    font-weight: normal;
+    color: var(--accent);
+    font-style: normal;
+  }
+  .row {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    margin: 36px 0;
+  }
+  .row .icon {
+    flex: 0 0 72px;
+    width: 72px;
+    height: 72px;
+  }
+  .row .body { flex: 1; }
+  .row h3 {
+    font-family: Georgia, serif;
+    font-weight: normal;
+    font-size: 19px;
+    margin: 0 0 6px 0;
+    color: var(--accent);
+    letter-spacing: 0.01em;
+  }
+  .row p { margin: 0; font-size: 17px; line-height: 1.65; }
+  .divider {
+    margin: 56px auto;
+    width: 80px;
+    border: none;
+    border-top: 1px solid var(--rule);
+    position: relative;
+  }
+  .divider::after {
+    content: '\00A7';
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--bg);
+    color: var(--muted);
+    padding: 0 10px;
+    font-size: 18px;
+  }
+  .closer {
+    background: #FFFFFF;
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 28px 32px;
+    margin: 48px 0 0 0;
+  }
+  .closer p { margin: 0 0 14px 0; }
+  .closer p:last-child { margin-bottom: 0; }
+  .closer .stamp {
+    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+    display: block;
+  }
+  .foot {
+    margin-top: 64px;
+    padding-top: 20px;
+    border-top: 1px solid var(--rule);
+    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 12px;
+    color: var(--muted);
+    text-align: center;
+  }
+  @media (max-width: 600px) {
+    h1 { font-size: 40px; }
+    .dek { font-size: 18px; }
+    body { font-size: 17px; }
+    .pull { font-size: 20px; padding-left: 18px; }
+    .row { gap: 14px; }
+    .row .icon { flex: 0 0 56px; width: 56px; height: 56px; }
+  }
+</style>
+</head>
+<body>
+
+  <nav style="position:sticky;top:0;z-index:20;background:rgba(255,255,255,0.92);backdrop-filter:saturate(140%) blur(10px);border-bottom:1px solid #E5E7EB;">
+    <div style="max-width:1080px;margin:0 auto;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;gap:24px;">
+      <div style="display:flex;align-items:center;gap:16px;">
+        <a href="index.html" style="color:#0B1220;font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:18px;letter-spacing:-0.01em;text-decoration:none;">Xavier Barbouche</a>
+        <a href="mailto:xavierbarbouche@gmail.com" style="display:inline-flex;align-items:center;padding:7px 14px;border-radius:7px;font-weight:600;font-size:13px;font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;background:#2563EB;color:#fff;border:1px solid #2563EB;text-decoration:none;">Get In Touch</a>
+      </div>
+      <div style="display:flex;gap:28px;align-items:center;">
+        <a href="index.html#top" style="color:#1F2937;font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:15px;padding:6px 2px;border-bottom:2px solid transparent;text-decoration:none;">About</a>
+        <a href="index.html#experience" style="color:#1F2937;font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:15px;padding:6px 2px;border-bottom:2px solid transparent;text-decoration:none;">Experience</a>
+        <a href="index.html#education" style="color:#1F2937;font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:15px;padding:6px 2px;border-bottom:2px solid transparent;text-decoration:none;">Education</a>
+        <a href="essays.html" style="color:#2563EB;font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:15px;padding:6px 2px;border-bottom:2px solid #2563EB;text-decoration:none;">Essays</a>
+      </div>
+    </div>
+  </nav>
+
+  <div style="max-width:720px;margin:0 auto;padding:28px 28px 0;font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;font-size:14px;">
+    <a href="essays.html" style="color:#2563EB;font-weight:500;text-decoration:none;">&larr; Back to Essays</a>
+  </div>
+
+<div class="wrap">
+
+  <p class="eyebrow">Essay &nbsp;·&nbsp; June 2026</p>
+  <h1>Take the Money Out</h1>
+  <p class="dek">The over-financialization of everything in life is making us miserable.  A short argument for the dishes, the cards, the tickets, and the bet on the couch.</p>
+
+  <!-- HERO: soccer ball wrapped in a price tag -->
+  <svg class="hero" viewBox="0 0 520 280" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <!-- ground line -->
+    <line x1="40" y1="240" x2="480" y2="240" stroke="#D9D3C7" stroke-width="1"/>
+    <!-- soccer ball -->
+    <g transform="translate(180 130)">
+      <circle cx="0" cy="0" r="80" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="2.5"/>
+      <polygon points="0,-32 30,-10 18,26 -18,26 -30,-10" fill="#1A1A1A"/>
+      <polygon points="0,-80 30,-58 0,-32 -30,-58" fill="none" stroke="#1A1A1A" stroke-width="2"/>
+      <polygon points="30,-58 65,-44 56,-12 30,-10" fill="none" stroke="#1A1A1A" stroke-width="2"/>
+      <polygon points="-30,-58 -65,-44 -56,-12 -30,-10" fill="none" stroke="#1A1A1A" stroke-width="2"/>
+      <polygon points="56,-12 50,40 18,26" fill="none" stroke="#1A1A1A" stroke-width="2"/>
+      <polygon points="-56,-12 -50,40 -18,26" fill="none" stroke="#1A1A1A" stroke-width="2"/>
+      <polygon points="50,40 18,68 -18,68 -50,40" fill="none" stroke="#1A1A1A" stroke-width="2"/>
+      <polygon points="18,26 18,68" fill="none" stroke="#1A1A1A" stroke-width="2"/>
+      <polygon points="-18,26 -18,68" fill="none" stroke="#1A1A1A" stroke-width="2"/>
+    </g>
+    <!-- price tag -->
+    <g transform="translate(310 90) rotate(18)">
+      <path d="M 0 0 L 130 0 L 170 36 L 130 72 L 0 72 Z" fill="#C85A2E"/>
+      <circle cx="14" cy="36" r="6" fill="#F7F5F1"/>
+      <text x="38" y="48" font-family="Georgia, serif" font-size="28" fill="#FFFFFF" font-style="italic">$$$</text>
+    </g>
+    <!-- string -->
+    <line x1="260" y1="130" x2="312" y2="100" stroke="#1A1A1A" stroke-width="1.5"/>
+  </svg>
+
+  <p class="lede">The FIFA World Cup is two weeks away, and all I've heard about for months is tickets.  My dad is buying more tickets.  Other people are trying to figure out how to flip the ones they have.  The conversation is never about the games.  It's about the prices.</p>
+
+  <p>That's been on my mind.  The world is getting more financialized every year, and I don't think it's making us any happier.</p>
+
+  <p>I'm an economics major, so maybe this is the wrong major saying the wrong thing.  But there's a difference between <em>spending</em> money and <em>making</em> money, and I want to draw a hard line between the two.</p>
+
+  <p class="pull"><strong>Spending</strong> money is fine.  <strong>Making</strong> money is where the stress lives.</p>
+
+  <p>Spending money is fine.  You go to a restaurant.  You buy groceries.  The amount is the amount.  There's no upside, no downside, no calculation about whether you should have waited, or sold, or held.  The transaction ends, and you go on with your day.</p>
+
+  <p>Making money is different.  Anywhere there's a chance you could end up with <em>more</em> money than you started — that's where the stress lives.</p>
+
+  <!-- THREE EXAMPLES with icons -->
+
+  <div class="row">
+    <svg class="icon" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <rect x="8" y="22" width="56" height="32" rx="3" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="2"/>
+      <line x1="36" y1="22" x2="36" y2="54" stroke="#1A1A1A" stroke-width="1.5" stroke-dasharray="2 2"/>
+      <text x="16" y="44" font-family="Georgia, serif" font-size="14" fill="#1A1A1A">FIFA</text>
+      <text x="42" y="44" font-family="Georgia, serif" font-size="14" fill="#C85A2E">$$$</text>
+    </svg>
+    <div class="body">
+      <h3>The scalpers</h3>
+      <p>Outside every soccer stadium I've ever been to (every one except Russia, which is a separate story).  Tickets stop being for the game.  They become inventory.</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <svg class="icon" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <rect x="14" y="10" width="44" height="60" rx="3" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="2"/>
+      <circle cx="36" cy="34" r="12" fill="#E8A87C" stroke="#1A1A1A" stroke-width="2"/>
+      <text x="22" y="60" font-family="Georgia, serif" font-size="11" fill="#1A1A1A">+150%</text>
+      <circle cx="56" cy="14" r="8" fill="#C85A2E"/>
+      <text x="50" y="18" font-family="Helvetica, Arial, sans-serif" font-size="9" fill="#FFFFFF" font-weight="bold">$$</text>
+    </svg>
+    <div class="body">
+      <h3>The card</h3>
+      <p>I bought Pokemon cards partly because I knew they'd go up.  One of them is worth 150% of what I paid.  Now I have to decide whether to sell now or hold and hope.  Greed says hold.  Sense says sell.  Either way, I'm thinking about it instead of just enjoying the card.</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <svg class="icon" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <rect x="12" y="8" width="48" height="60" rx="2" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="2"/>
+      <line x1="18" y1="20" x2="54" y2="20" stroke="#6B6F75" stroke-width="1"/>
+      <line x1="18" y1="28" x2="54" y2="28" stroke="#6B6F75" stroke-width="1"/>
+      <line x1="18" y1="36" x2="54" y2="36" stroke="#6B6F75" stroke-width="1"/>
+      <line x1="18" y1="44" x2="54" y2="44" stroke="#6B6F75" stroke-width="1"/>
+      <line x1="18" y1="52" x2="54" y2="52" stroke="#6B6F75" stroke-width="1"/>
+      <text x="20" y="64" font-family="Georgia, serif" font-size="9" fill="#C85A2E">8-LEG</text>
+    </svg>
+    <div class="body">
+      <h3>The parlay</h3>
+      <p>Twenty bucks turns into an eight-leg parlay you'll never win, marketed at people who are already stretched thin and looking for any path to ends meeting.  The whole industry preys on desperation, and it's everywhere now.</p>
+    </div>
+  </div>
+
+  <p>I'm guilty of all of this.  I'm not writing from a height.  I bought the cards.  If I had a World Cup ticket I didn't want, I'd probably try to sell it at a profit too.  But that's the point.  Once money enters the picture, it doesn't leave.  It changes how you act.  It changes how the people around you act.</p>
+
+  <hr class="divider">
+
+  <p>Here's the smaller version of the same point.</p>
+
+  <div class="row">
+    <svg class="icon" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <ellipse cx="36" cy="48" rx="26" ry="6" fill="none" stroke="#1A1A1A" stroke-width="2"/>
+      <ellipse cx="36" cy="44" rx="26" ry="6" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="2"/>
+      <ellipse cx="36" cy="44" rx="18" ry="4" fill="none" stroke="#6B6F75" stroke-width="1"/>
+      <path d="M 36 28 L 36 38" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round"/>
+      <path d="M 30 32 L 36 38 L 42 32" stroke="#1A1A1A" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="22" y="20" font-family="Georgia, serif" font-size="11" fill="#C85A2E" font-style="italic">$5?</text>
+    </svg>
+    <div class="body">
+      <h3>The dishes</h3>
+      <p>I was in the kitchen with my sister.  I'd made dinner.  The dishes needed to be cleared.  I said I didn't want to do them, because I'd cooked.  My sister said — offhanded, the way she says these things — that she shouldn't have to clear them either, because women already do unpaid labor.</p>
+    </div>
+  </div>
+
+  <p>Extend that sentence.  If clearing the table is unpaid labor that should be paid, then everything in a household is unpaid labor.  Do I bill her for mowing the lawn?  Does she bill her boyfriend for unloading the dishwasher?  Does the family run on invoices?</p>
+
+  <p class="pull">The answer can't be that.  The answer is somebody clears the dishes.  You suck it up.  You move on.</p>
+
+  <p>I'm guilty of dragging my feet on this kind of thing too — I'm not writing from above the fray.  But once you put a price tag on the dishes, you've made the dishes worse.  You've made the dinner worse.  You've made the house worse.</p>
+
+  <hr class="divider">
+
+  <div class="closer">
+    <span class="stamp">The Recommendation</span>
+    <p>Money isn't bad.  Money is useful.  But the more scenarios you let money into — especially the scenarios where you could come out <em>ahead</em> — the more stress you're carrying around.  People don't need more stress right now.  They need fewer scenarios where they're calculating.</p>
+    <p>So:  take money out of as many scenarios in your life as you can.  The dishes.  The card.  The game ticket.  The bet with your buddy on the couch.  Some of those will be hard to give up.  I won't give all of them up myself.  But every one you take back is a place where you get to relax again.</p>
+  </div>
+
+  <div class="foot">
+    Take the Money Out  &nbsp;·&nbsp;  June 2026
+  </div>
+
+</div>
+</body>
+</html>
